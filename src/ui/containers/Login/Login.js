@@ -4,6 +4,9 @@ import React, {
 import {
   connect,
 } from 'react-redux';
+import {
+  push,
+} from 'react-router-redux';
 import { 
   propTypes, 
   reduxForm, 
@@ -12,6 +15,10 @@ import {
 import {
   login,
 } from '../../../redux/actions';
+import {
+  HOME_ROUTE,
+  AUTH_LOGIN_ROUTE,
+} from '../../../common';
 import compose from 'recompose/compose';
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -28,7 +35,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import defaultTheme from '../defaultTheme';
 
 import TextInput from '../../components/TextInput';
-
+import CustomerTypeSelector from '../../components/CustomerTypeSelector';
 const styles = {
   body: {
     display: 'flex',
@@ -58,13 +65,21 @@ const styles = {
 
 const prefixedStyles = {};
 
-const Login = (props) => {
-  const { 
+export class  Login extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      showSelectCustomerTypeView:true
+    }
+  }
+  render(){
+    const { 
     handleSubmit, 
     onSubmit, 
+    onSubmitCustomerType,
     submitting, 
     theme 
-  } = props;
+  } = this.props;
   
   const muiTheme = getMuiTheme(theme);
   if (!prefixedStyles.main) {
@@ -75,7 +90,26 @@ const Login = (props) => {
     prefixedStyles.form = prefix(styles.form);
     prefixedStyles.input = prefix(styles.input);
   }
-
+  if(this.state.showSelectCustomerTypeView){
+    return (
+      <div style={prefixedStyles.body}>
+      <Card style={prefixedStyles.card}>
+        <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
+        <div>YOU ARE A :</div>
+          <div style={prefixedStyles.form}>
+            <div style={prefixedStyles.input}>
+              <CustomerTypeSelector onChange={(value)=>{
+                   this.setState({
+                     showSelectCustomerTypeView:false,
+                     type:value
+                   })
+                }}/>
+            </div>
+          </div>
+      </Card>
+    </div>
+    )
+  }
   return (
     <div style={prefixedStyles.body}>
       <Card style={prefixedStyles.card}>
@@ -85,15 +119,6 @@ const Login = (props) => {
         
         <form onSubmit={handleSubmit(onSubmit)}>
           <div style={prefixedStyles.form}>
-            <div style={prefixedStyles.input}>
-              <Field
-                name="email"
-                component={TextInput}
-                type="text"
-                floatingLabelText="Email"
-                disabled={submitting}
-              />
-            </div>
             <div style={prefixedStyles.input}>
               <Field
                 name="password"
@@ -118,6 +143,8 @@ const Login = (props) => {
       </Card>
     </div>
   );
+  }
+  
 }
 
 Login.propTypes = {
@@ -135,8 +162,10 @@ const mapStateToProps = (state) => ({
 });
 
 const onSubmit = (values, dispatch, props) => {
-  dispatch(login(values, props.form, props.csrfToken))
+  //dispatch(login(values, props.form, props.csrfToken))
+  dispatch(push(HOME_ROUTE));
 }; // when dispatching a LOGIN action it triggers a fetch saga
+
 
 const enhance = compose(
   connect(mapStateToProps),

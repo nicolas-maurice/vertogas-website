@@ -18,7 +18,7 @@ import {
 import logo from './logo.svg';
 
 const Home = (props) => {
-  const {
+  let {
     user
   } = props;
 
@@ -31,7 +31,7 @@ const Home = (props) => {
           subtitle="React App"
         />
         <CardTitle 
-          title={`Hey ${user.firstName}`}
+          title={'Hey what ever'}
           subtitle="We are glad to welcome you on our Flask-React boilerplate ! :-)"/>
         <CardText>
           {"Love React + Python <3"}

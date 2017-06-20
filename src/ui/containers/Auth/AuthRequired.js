@@ -14,7 +14,7 @@ const AuthRequired = (props) => {
       user
     }
   } = props;
-
+  return children;
   if (user) {
     return children ;
   } else {

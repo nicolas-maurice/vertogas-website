@@ -109,7 +109,7 @@ export class  Login extends React.Component {
           
         <Card style={prefixedStyles.card}>
           <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
-          <div>YOU ARE A :</div>
+          <div style={{marginBottom:20}}>YOU ARE A :</div>
             <div style={prefixedStyles.form}>
               <div style={prefixedStyles.input}>
                 <CustomerTypeSelector onChange={(value)=>{
@@ -130,8 +130,8 @@ export class  Login extends React.Component {
         <img src={background} alt="" className="backgroundPicture"/>
       </div>
       <Card style={prefixedStyles.card}>
-        <div style={prefixedStyles.avatar}>
-          <Avatar icon={<LockIcon />} size={60} />
+        <div>
+          ENTER YOUR BLOCKCHAIN KEY BELOW :
         </div>
         
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -141,16 +141,15 @@ export class  Login extends React.Component {
                 name="password"
                 component={TextInput}
                 type="password"
-                floatingLabelText="Password"
+                floatingLabelText="BLOCKCHAIN KEY NUMBER"
                 disabled={submitting}
               />
             </div>
           </div>
           <CardActions>
             <RaisedButton
-              type="submit"
-              primary
-              label="Log In"
+              backgroundColor="#FEC61A"
+              label="Validate"
               disabled={submitting}
               icon={submitting && <CircularProgress size={20} thickness={2}/>}
               fullWidth

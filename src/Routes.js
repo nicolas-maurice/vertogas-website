@@ -26,7 +26,7 @@ import {
 
 const menuItems = [
   {
-    name: "Home",
+    name: "Producer",
     path: HOME_ROUTE,
     icon: HomeIcon,
   },

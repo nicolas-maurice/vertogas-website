@@ -11,8 +11,8 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {PieChart, Pie, Sector, Cell} from 'recharts';
-const data = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200}];
+const data = [{name: 'Grass', value: 400}, {name: 'Wood', value: 300},
+                  {name: 'Corn', value: 300}];
 
 const styles = {
   sidebarProducer: {
@@ -29,7 +29,7 @@ const styles = {
   }
 };
 
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+const COLORS = ['#FEC61A', '#CD9B00', '#9E7700'];
 
 const ProducerSideBar = (props) => {
   const { open, children } = props;
@@ -46,17 +46,22 @@ const ProducerSideBar = (props) => {
         <MenuItem value={5} primaryText="Weekly" />
       </SelectField>
 
-      <h2>POWERPLANT_1 DETAILS :</h2>
+      <h2 style={{
+        fontSize: 14,
+        color: "#FFFFFF"
+      }}>POWERPLANT_1 DETAILS :</h2>
 
-      <p>
+      <p style={{/* Lorem ipsum dolor si: */
+fontSize: 12,
+color: "#FFFFFF"}}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit commodi repudiandae amet sed exercitationem, debitis dignissimos fugiat sint beatae omnis facere possimus incidunt explicabo perferendis, dolorem fuga voluptates accusantium at.
       </p>
 
-      	<PieChart width={300} height={300}>
+      	<PieChart width={300} height={300} style={{margin:"auto"}}>
           <Pie 
             data={data} 
-            cx={300} 
-            cy={200} 
+            cx="50%" 
+            cy="50%" 
             innerRadius={60}
             outerRadius={80} 
             fill="#8884d8">
@@ -69,6 +74,8 @@ const ProducerSideBar = (props) => {
 
       <RaisedButton
         label="PRODUCE"
+        fullWidth
+        backgroundColor="#FEC61A"
         /*style={{height: 60}}*/
       />
 

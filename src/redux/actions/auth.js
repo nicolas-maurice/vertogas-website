@@ -7,7 +7,7 @@ import {
   PUT,
 } from '../../APIManager';
 import {
-  AUTH_API_BASE_URL,
+  API_BASE_URL,
   LOAD_AUTH_RESOURCE,
   LOGIN_RESOURCE,
   LOGOUT_RESOURCE,
@@ -26,7 +26,7 @@ export const LOAD_AUTH_CANCEL = 'LOAD_AUTH_CANCEL';
 export const loadAuth = () => ({
   type: LOAD_AUTH,
   meta: {
-    APIBaseUrl: AUTH_API_BASE_URL,
+    APIBaseUrl: API_BASE_URL,
     resource: LOAD_AUTH_RESOURCE,
     requestType: GET,
   }
@@ -49,7 +49,7 @@ export const login = (values, formName, csrfToken) => ({
   type: LOGIN,
   payload: values,
   meta: {
-    APIBaseUrl: AUTH_API_BASE_URL,    
+    APIBaseUrl: API_BASE_URL,    
     resource: LOGIN_RESOURCE,
     requestType: POST,
     formName,
@@ -71,7 +71,7 @@ export const LOGOUT_CANCEL = 'LOGOUT_CANCEL';
 export const logout = (csrfToken) => ({
   type: LOGOUT,
   meta: {
-    APIBaseUrl: AUTH_API_BASE_URL,    
+    APIBaseUrl: API_BASE_URL,    
     resource: LOGOUT_RESOURCE,
     requestType: PUT,
     csrfToken,

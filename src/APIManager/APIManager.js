@@ -56,6 +56,7 @@ const APIManager = (httpClient) => {
    */
   const handleResponse = (response, type, APIBaseURL, resource, params) => {
     switch (type) {
+
       default:
         return response && response.json ? response.json : undefined;
     }

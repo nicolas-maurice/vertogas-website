@@ -33,7 +33,6 @@ const createFetchSaga = (APIManager) => {
         APIBaseUrl,
         resource,
         requestType,
-        csrfToken, 
         formName, 
         ...meta
       }
@@ -62,14 +61,12 @@ const createFetchSaga = (APIManager) => {
         APIBaseUrl,
         resource, 
         {
-          data: payload, 
-          csrfToken
+          data: payload
         }
       );
 
       /* Indicates that the saga terminated */    
-      sagaTerminated = true;       
-      
+      sagaTerminated = true;
       /* Success dispatch */
       yield [
         formName ? put(stopSubmit(formName)) : undefined, // dispatch redux-form STOP_SUBMIT action
@@ -77,12 +74,11 @@ const createFetchSaga = (APIManager) => {
         put({ type: FETCH_SUCCESS }), // general success dispatch coming with every fetch action
         put({
           type: `${type}_SUCCESS`,
-          payload: response.data,
+          payload: response,
           meta: {
             resource, 
             payload,
-            date: Date.now(),            
-            csrfToken: response.csrfToken,
+            date: Date.now(),
             ...meta,
           },
         }),// relative success dispatch for this particular fetch action

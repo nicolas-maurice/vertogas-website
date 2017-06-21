@@ -10,13 +10,18 @@ import {
 
 import ui from './ui';
 import auth from './auth';
+import logs from './logs'
+import powerPlans from './powerPlants'
+import tokens from './tokens'
 
 /* Build app reducers */
 const reducer = combineReducers({
-  auth,
   ui,
   routing,
-  form,
+  tokens,
+  powerPlans,
+  logs,
+  auth
 });
 
 export default reducer;

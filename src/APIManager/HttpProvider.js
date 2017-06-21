@@ -19,9 +19,7 @@ const HttpProvider = (url, options={}) => {
   return (
     fetch(url, {
       ...options, 
-      headers: requestHeaders, 
-      mode: 'cors', // indicates that cross origin request must be perform
-      credentials: 'include', // indicates the user agent to include cookies from other domain
+      headers: requestHeaders,
     })
     .then(response => (
       response.text()

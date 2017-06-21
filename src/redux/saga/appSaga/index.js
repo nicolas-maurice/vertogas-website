@@ -19,7 +19,12 @@ import {
   LOGIN,
   LOGOUT,
   FETCH_FAILURE,
+  POWER_PLANTS,
   AUTH_ACTION_TYPES,
+  GAZUNI_ACTION_TYPES,
+  LOGS,
+  OWNER_TOKENS,
+  POWER_PLANTS_TOKENS
 } from '../../actions';
 import {
   HOME_ROUTE,
@@ -39,59 +44,33 @@ function createAppSaga(APIManager) {
    */
   function* appSaga() {
     while (true) {
-      /* Make an API call to load user authentification */
-      yield fork(handleFetch, loadAuth());
-
-      /* Waits for outcome from the authentification loading task */
-      const authTaskOutcomeAction = yield take([`${LOAD_AUTH}_FAILURE`, `${LOAD_AUTH}_SUCCESS`]);
-
-      if (authTaskOutcomeAction.type === `${LOAD_AUTH}_FAILURE`) {    
-        /* If Authentification loading failed then user is redirected to the login page */   
-        yield put(push(AUTH_LOGIN_ROUTE));
-        //yield put(push(CONSUMER));
-        function* loginCycle() {
-          yield takeLatest(LOGIN, handleFetch);
-        }
-
-        /**
-         * Starts a race that accepts LOGIN requests and finishes when a succesful login action is dispatched to the server
-         */
-        yield race({
-          loginCycle: call(loginCycle),
-          loginSuccess: take(`${LOGIN}_SUCCESS`),
-        });
-      }
-
-      yield put(push(HOME_ROUTE));
+     
+        
       
-      /**
-       * Reaching this point means user is correctly logged in.
-       * From now on user can
-       *  - load authentification
-       *  - perform fetch request
-       *  - logout
-       * In case we detect 
-       *  - a successful logout
-       *  - any fetch authentification error with status 401
-       */
+      yield put(push(CONSUMER));
+      //yield put(push(HOME_ROUTE));
       
-      function* loadAuthCycle() { 
-        yield takeLatest(LOAD_AUTH, handleFetch);
+      function* getPowerPlantsCycle() { 
+        yield takeLatest(POWER_PLANTS, handleFetch);
       };
-
-      function* logoutCycle() {
-        yield takeLatest(LOGOUT, handleFetch);        
+       function* getLogsCycle() { 
+        yield takeLatest(LOGS, handleFetch);
       };
-      
+       function* getOwnerTokensCycle() { 
+        yield takeLatest(OWNER_TOKENS, handleFetch);
+      };
+       function* getPowerPlantsTokensCycle() { 
+        yield takeLatest(POWER_PLANTS_TOKENS, handleFetch);
+      };
       function* fetchCycle() {
-        yield takeEvery(action => action.meta && action.meta.fetch && !AUTH_ACTION_TYPES.includes(action.type), handleFetch);        
+        yield takeEvery(action => action.meta && action.meta.fetch && !AUTH_ACTION_TYPES.includes(action.type) && !GAZUNI_ACTION_TYPES.includes(action.type), handleFetch);        
       };
 
       yield race({
-        logoutSuccess: take(`${LOGOUT}_SUCCESS`),         
-        unauthFailure: take(action => (action.type === FETCH_FAILURE && action.payload.status === 401)),
-        loadAuthCycle: call(loadAuthCycle),
-        logoutCycle: call(logoutCycle),
+        getPowerPlantsCycle:call(getPowerPlantsCycle),
+        getLogsCycle:call(getLogsCycle),
+        getOwnerTokensCycle:call(getOwnerTokensCycle),
+        getPowerPlantsTokensCycle:call(getPowerPlantsTokensCycle),
         fetchCycle: call(fetchCycle),
       });
 

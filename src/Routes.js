@@ -11,6 +11,7 @@ import Login from './ui/containers/Login/Login';
 import Layout from './ui/containers/Layout/Layout';
 import Menu from './ui/containers/Layout/Menu';
 import Home from './ui/containers/Home/Home';
+import Consumer from './ui/containers/Consumer/Consumer';
 import NotFound from './ui/containers/NotFound/NotFound';
 import {
   AuthRequired,
@@ -20,6 +21,7 @@ import {
   HOME_ROUTE,
   AUTH,
   LOGIN,
+  CONSUMER
 } from './common';
 
 const menuItems = [
@@ -29,8 +31,8 @@ const menuItems = [
     icon: HomeIcon,
   },
   {
-    name: "Nowhere",
-    path: '/no-where',
+    name: "Consumer",
+    path: CONSUMER,
     icon: VisibilityOffIcon,
   },
 ];
@@ -60,6 +62,7 @@ const getRoutes = () => {
         <Route component={AuthRequired}>
           <Route component={LayoutComponent}>
             <IndexRoute component={Home} />
+            <Route path={CONSUMER} component={Consumer} />
             <Route path="*" component={NotFound} />
           </Route>
         </Route>

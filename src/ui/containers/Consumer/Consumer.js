@@ -15,6 +15,7 @@ import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
+import BarChart from '../../components/BarChart'
 import './Consumer.css'
 import {
   white
@@ -31,7 +32,7 @@ export class Consumer extends React.Component{
     }
     render(){
         return (
-            <div>
+            <div style={{height:'100%', backgroundColor: "#f4f4f4", padding:20}}>
                 <div className='key_holder'>
                     <div>
                         <strong className='key_label'>KEY: </strong>SQDSQDSQDQSDQDQSDQSDQSD
@@ -83,35 +84,35 @@ export class Consumer extends React.Component{
                                 <TableRowColumn>1</TableRowColumn>
                                 <TableRowColumn>John Smith</TableRowColumn>
                                 <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>John Smith</TableRowColumn>
+                                <TableRowColumn><BarChart Wood="10%" Grass="30%" Corn="60%" /></TableRowColumn>
                                 <TableRowColumn><TokenStatusButton/></TableRowColumn>
                             </TableRow>
                             <TableRow>
                                 <TableRowColumn>2</TableRowColumn>
                                 <TableRowColumn>Randal White</TableRowColumn>
                                 <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>Randal White</TableRowColumn>
+                                <TableRowColumn><BarChart Wood="80%" Grass="20%" Corn="0" /></TableRowColumn>
                                 <TableRowColumn><TokenStatusButton/></TableRowColumn>
                             </TableRow>
                             <TableRow>
                                 <TableRowColumn>3</TableRowColumn>
                                 <TableRowColumn>Stephanie Sanders</TableRowColumn>
                                 <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
+                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
                                 <TableRowColumn><TokenStatusButton/></TableRowColumn>
                             </TableRow>
                             <TableRow>
                                 <TableRowColumn>4</TableRowColumn>
                                 <TableRowColumn>Steve Brown</TableRowColumn>
                                 <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>Steve Brown</TableRowColumn>
+                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
                                 <TableRowColumn><TokenStatusButton/></TableRowColumn>
                             </TableRow>
                             <TableRow>
                                 <TableRowColumn>5</TableRowColumn>
                                 <TableRowColumn>Christopher Nolan</TableRowColumn>
                                 <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>Christopher Nolan</TableRowColumn>
+                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
                                 <TableRowColumn><TokenStatusButton/></TableRowColumn>
                             </TableRow>
                         </TableBody>

@@ -4,12 +4,15 @@ import React, {
 import { 
   connect ,
 } from 'react-redux';
-import MuiAppBar from 'material-ui/AppBar';
 
 import { 
   toggleSidebar, 
 } from '../../../redux/actions';
 import UserBoxIcon from './UserBox';
+
+import './AppBar.css';
+
+import Logo from '../../../../public/img/logo.png';
 
 
 const AppBar = (props) => {
@@ -19,12 +22,9 @@ const AppBar = (props) => {
   } = props
 
   return (
-    <MuiAppBar
-      title={title}
-      onLeftIconButtonTouchTap={toggleSidebar}
-      iconElementRight={<UserBoxIcon />}
-      zDepth={2}
-    />
+     <div className="topBar">
+        <img src={Logo} alt="Gasuni logo"/>
+     </div>
   );
 }
 

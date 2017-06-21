@@ -38,7 +38,13 @@ const menuItems = [
 ];
 
 const MenuComponent = () => (
-  <Menu items={menuItems} />
+  <Menu 
+    items={menuItems}
+    selectedMenuItemStyle={{
+      background: "#FEC61A",
+      color: "#2E2E2E"
+    }} 
+  />
 );
 
 const LayoutComponent = ({children}) => {

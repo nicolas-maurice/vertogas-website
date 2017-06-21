@@ -29,6 +29,9 @@ const Menu = ({items, open}) => (
           leftIcon={open ? <item.icon /> : null}
           rightIcon={!open ? <item.icon /> : null}
           containerElement={<Link to={item.path} />}
+          style={{
+            color: "#fff"
+          }}
         />
       )
     )}

@@ -10,6 +10,7 @@ import SideBar from './SideBar';
 import defaultTheme from '../defaultTheme';
 
 import './Layout.css';
+import background from '../../../../public/img/background.png'
 
 const styles = {
   main: {
@@ -21,10 +22,11 @@ const styles = {
     display: 'flex',
     flex: 1,
     overflow: 'hidden',
+    background: `url(${background}) no-repeat`,
+    backgroundSize: "100% 100%"
   },
   content: {
-    flex: 1,
-    padding: '1em',
+    flex: 1
   },
 };
 

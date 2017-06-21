@@ -20,27 +20,29 @@ export default class CustomerTypeSelector extends Component {
   render() {
     const { value, onChange } = this.props
     return (
-      <div>
-        <span>The current value is {value}.</span>
-
+      <div style={{width:"100%"}}>
         <div>
-            <RaisedButton
-              backgroundColor="#FEC61A"
-              onClick={() => onChange('Producer')}
-              icon={<ProducerIcon color="#555555" 
-              className="producerBTN"
-              />}
-            />
-
-            - OR -
-
-             <RaisedButton
-              backgroundColor="#fff"
-              onClick={() => onChange('Customer')}
-              icon={<CustomerIcon color="#555555" 
-              className="producerBTN"
-              />}
-            />
+            <div style={{width:"33.33%",float:"left"}}>
+              <RaisedButton
+                backgroundColor="#FEC61A"
+                onClick={() => onChange('Producer')}
+                icon={<ProducerIcon color="#555555" 
+                className="producerBTN"
+                />}
+              />
+            </div>
+            <div style={{width:"33.33%",float:"left", lineHeight: "91px"}}>
+              - OR -
+            </div>
+            <div style={{width:"33.33%",float:"left"}}>
+              <RaisedButton
+                backgroundColor="#fff"
+                onClick={() => onChange('Customer')}
+                icon={<CustomerIcon color="#555555" 
+                className="producerBTN"
+                />}
+              />
+            </div>
         </div>
        
       </div>

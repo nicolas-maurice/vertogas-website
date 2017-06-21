@@ -9,6 +9,8 @@ import AppBar from './AppBar';
 import SideBar from './SideBar';
 import defaultTheme from '../defaultTheme';
 
+import './Layout.css';
+
 const styles = {
   main: {
     display: 'flex',

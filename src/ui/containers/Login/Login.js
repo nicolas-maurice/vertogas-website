@@ -36,17 +36,26 @@ import defaultTheme from '../defaultTheme';
 
 import TextInput from '../../components/TextInput';
 import CustomerTypeSelector from '../../components/CustomerTypeSelector';
+
+
+import background from '../../../../public/img/background.png'
+import './Login.css';
 const styles = {
   body: {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
     alignItems: 'center',
-    justifyContent: 'center',  
+    justifyContent: 'center'
   },
 
   card: {
     minWidth: 300,
+    background: "rgba(43,43,43,0.57)",
+    boxShadow: "0 2px 4px 0 rgba(0,0,0,0.50)",
+    color: "#fff",
+    padding: "82px 130px",
+    textAlign: "center"
   },
 
   avatar: {
@@ -64,6 +73,7 @@ const styles = {
 };
 
 const prefixedStyles = {};
+
 
 export class  Login extends React.Component {
   constructor(props){
@@ -93,25 +103,32 @@ export class  Login extends React.Component {
   if(this.state.showSelectCustomerTypeView){
     return (
       <div style={prefixedStyles.body}>
-      <Card style={prefixedStyles.card}>
-        <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
-        <div>YOU ARE A :</div>
-          <div style={prefixedStyles.form}>
-            <div style={prefixedStyles.input}>
-              <CustomerTypeSelector onChange={(value)=>{
-                   this.setState({
-                     showSelectCustomerTypeView:false,
-                     type:value
-                   })
-                }}/>
+        <div className="backgroundContainer">
+          <img src={background} alt="" className="backgroundPicture"/>
+        </div>
+          
+        <Card style={prefixedStyles.card}>
+          <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
+          <div>YOU ARE A :</div>
+            <div style={prefixedStyles.form}>
+              <div style={prefixedStyles.input}>
+                <CustomerTypeSelector onChange={(value)=>{
+                    this.setState({
+                      showSelectCustomerTypeView:false,
+                      type:value
+                    })
+                  }}/>
+              </div>
             </div>
-          </div>
-      </Card>
-    </div>
+        </Card>
+      </div>
     )
   }
   return (
     <div style={prefixedStyles.body}>
+      <div className="backgroundContainer">
+        <img src={background} alt="" className="backgroundPicture"/>
+      </div>
       <Card style={prefixedStyles.card}>
         <div style={prefixedStyles.avatar}>
           <Avatar icon={<LockIcon />} size={60} />

@@ -1,0 +1,13 @@
+.producerBTN{
+    height: 71px !important;
+    width: 62px !important;
+}
+
+button > div > div {
+    height: inherit !important;
+}
+
+button{
+    height: inherit !important;
+    padding: 10px !important;
+}

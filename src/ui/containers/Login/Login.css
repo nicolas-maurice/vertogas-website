@@ -1,0 +1,22 @@
+.backgroundPicture{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+
+.backgroundContainer:after{
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Rectangle Copy: */
+    background: rgba(0,0,0,0.49);
+}

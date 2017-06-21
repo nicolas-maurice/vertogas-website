@@ -47,8 +47,8 @@ function createAppSaga(APIManager) {
 
       if (authTaskOutcomeAction.type === `${LOAD_AUTH}_FAILURE`) {    
         /* If Authentification loading failed then user is redirected to the login page */   
-        //yield put(push(AUTH_LOGIN_ROUTE));
-        yield put(push(CONSUMER));
+        yield put(push(AUTH_LOGIN_ROUTE));
+        //yield put(push(CONSUMER));
         function* loginCycle() {
           yield takeLatest(LOGIN, handleFetch);
         }

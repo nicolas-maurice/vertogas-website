@@ -37,12 +37,9 @@ const producerBody = {
 export class Home extends React.Component {
   componentDidMount(){
     this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb');
-    console.log('component did mount')
   }
   render(){
     const {powerPlants,selectedPowerPlant} = this.props;
-    console.log(powerPlants)
-    console.log(selectedPowerPlant)
     if(!selectedPowerPlant){
       return <div> loading</div>
     }

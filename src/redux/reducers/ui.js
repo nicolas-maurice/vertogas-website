@@ -45,10 +45,10 @@ export default (state = initialState, { type, payload }) => {
       selectedPowerPlant:payload
     }
     case POWER_PLANTS_SUCCESS:
-      if(payload && payload.powerPlants && payload.powerPlants.length > 0){
+      if(payload  && payload.length > 0){
         return {
           ...state,
-          selectedPowerPlant: payload.powerPlants[0]
+          selectedPowerPlant: payload[0]
         }
       }
       return state;

@@ -74,7 +74,7 @@ const createFetchSaga = (APIManager) => {
         put({ type: FETCH_SUCCESS }), // general success dispatch coming with every fetch action
         put({
           type: `${type}_SUCCESS`,
-          payload: response,
+          payload: response[Object.keys(response)[0]],
           meta: {
             resource, 
             payload,

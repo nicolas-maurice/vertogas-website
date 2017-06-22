@@ -10,7 +10,9 @@ import {
   setOwner
 } from '../../../redux/actions';
 import {
-  HOME_ROUTE
+  HOME_ROUTE,
+  OWNER_TYPES,
+  CONSUMER
 } from '../../../common';
 
 
@@ -78,7 +80,11 @@ export class  Login extends React.Component {
     let blockChain = this.state.blockChain;
     if(blockChain && blockChain.length > 0){
       this.props.setOwner(blockChain,type);
-      this.props.push(HOME_ROUTE)
+      if(type === OWNER_TYPES.PRODUCER){
+        this.props.push(HOME_ROUTE)
+      }else{
+        this.props.push(CONSUMER)
+      }
     }
   }
   render(){

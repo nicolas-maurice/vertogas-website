@@ -3,12 +3,13 @@ import {
   SET_SIDEBAR_VISIBILITY,
   TOGGLE_USER_BOX,
   SET_USER_BOX_VISIBILITY,
-  LOGOUT
+  SELECT_POWER_PLANT
 } from '../actions';
 
 const initialState = {
   sidebarOpen: true,
   userBoxOpen: false,
+  selectedPowerPlant: null
 }
 
 /* ui reducer */
@@ -37,9 +38,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         userBoxOpen: payload,
       };
-    
-    case `${LOGOUT}_SUCCESS`:
-      return initialState;
+    case SELECT_POWER_PLANT:
+    return {
+      ...state,
+      selectedPowerPlant:payload
+    }
 
     default:
       return state;

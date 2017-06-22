@@ -4,11 +4,64 @@ import {
 import {
   OWNER_TOKENS,
   POWER_PLANTS_TOKENS,
+  ALL_TOKENS,
   FETCH_FAILURE,
 } from '../actions';
 /**
  * Reducers related to tokens handling
  */
+
+
+/* reducer responsible for ownerTokens management */
+const allTokensReducer = (state = null, action) => {
+  switch (action.type) {
+    case `${ALL_TOKENS}_SUCCESS`:
+      return action.payload;
+    case `${ALL_TOKENS}_FAILURE`:
+      if (action.payload.status === 401) {
+        return null;
+      } else {
+        return state;
+      } 
+    default:
+      return state;
+  }
+};
+
+/* reducer responsible for ownerTokens status management */
+const allTokenStatusReducer = (state = null, action) => {
+  switch (action.type) {      
+    case `${ALL_TOKENS}_REQUEST`:
+      return {
+        loading: true,
+        requestDate: action.meta.date,
+      };
+
+    case `${ALL_TOKENS}_SUCCESS`:
+      return {
+        ...state,
+        loading: false,
+        successDate: action.meta.date,
+      };
+
+    case `${ALL_TOKENS}_FAILURE`:
+      return {
+        ...state,
+        loading: false,
+        failureDate: action.meta.date,
+        error: action.payload,
+      };
+
+    case `${ALL_TOKENS}_CANCEL`:
+      return {
+        ...state,
+        loading: false,
+        cancelDate: action.meta.date,
+      };
+    default:
+      return state;
+  }
+};
 
 /* reducer responsible for ownerTokens management */
 const ownerTokensReducer = (state = null, action) => {
@@ -119,6 +172,10 @@ const powerPlantsTokensStatusReducer = (state = null, action) => {
 
 /* Combine all reducers into the auth reducers */
 export default combineReducers({
+  all: combineReducers({
+        tokens:allTokensReducer,
+        status: allTokenStatusReducer
+  }),
   ownerTokens: combineReducers({
         tokens:ownerTokensReducer,
         status: ownerTokensStatusReducer

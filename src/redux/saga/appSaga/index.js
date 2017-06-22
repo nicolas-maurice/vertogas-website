@@ -24,7 +24,8 @@ import {
   GAZUNI_ACTION_TYPES,
   LOGS,
   OWNER_TOKENS,
-  POWER_PLANTS_TOKENS
+  POWER_PLANTS_TOKENS,
+  ALL_TOKENS
 } from '../../actions';
 import {
   HOME_ROUTE,
@@ -56,6 +57,9 @@ function createAppSaga(APIManager) {
        function* getLogsCycle() { 
         yield takeLatest(LOGS, handleFetch);
       };
+       function* getAllTokensCycle() { 
+        yield takeLatest(ALL_TOKENS, handleFetch);
+      };
        function* getOwnerTokensCycle() { 
         yield takeLatest(OWNER_TOKENS, handleFetch);
       };
@@ -70,6 +74,7 @@ function createAppSaga(APIManager) {
         getPowerPlantsCycle:call(getPowerPlantsCycle),
         getLogsCycle:call(getLogsCycle),
         getOwnerTokensCycle:call(getOwnerTokensCycle),
+        getAllTokensCycle:call(getAllTokensCycle),
         getPowerPlantsTokensCycle:call(getPowerPlantsTokensCycle),
         fetchCycle: call(fetchCycle),
       });

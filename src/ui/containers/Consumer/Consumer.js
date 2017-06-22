@@ -10,7 +10,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import {getPowerPlants} from '../../../redux/actions'
+import {getPowerPlants,getAlltoken} from '../../../redux/actions'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
@@ -33,9 +33,11 @@ export class Consumer extends React.Component{
     }
     componentDidMount(){
         console.log('did mount')
-        this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb')
+        this.props.getAlltoken()
+        //this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb')
     }
     render(){
+        console.log(this.props.tokens)
         return (
             <div style={{height:'100%', backgroundColor: "#f4f4f4", padding:20}}>
                 <div className='key_holder'>
@@ -129,10 +131,11 @@ export class Consumer extends React.Component{
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  tokens: state.tokens
 })
 const actions = {
-  getPowerPlants
+  getPowerPlants,
+  getAlltoken
 };
 export default connect(
   mapStateToProps,

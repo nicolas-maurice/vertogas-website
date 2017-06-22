@@ -20,7 +20,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TokenStatusButton from '../../components/TokenStatusButton'
-
+import {getPowerPlants,getPowerPlantsTokens} from '../../../redux/actions';
 import {
   white
 } from 'material-ui/styles/colors';
@@ -34,141 +34,152 @@ const producerBody = {
   backgroundColor:"#F4F4F4"
 }
 
-const Home = (props) => {
-  let {
-    user
-  } = props;
+export class Home extends React.Component {
+  componentDidMount(){
+    this.props.getPowerPlants(this.props.owner.address);
+  }
+  render(){
+    const {powerPlants} = this.props;
+    console.log(powerPlants)
+     return (
+          <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
 
-  return (
-    <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
+            <ProducerSideBar powerPlants={powerPlants}/>
 
-      <ProducerSideBar />
+            <div style={producerBody}>
+              <div style={{margin:20}}>
+                <div className='key_holder'>
+                    <div>
+                        <strong className='key_label'>KEY: </strong>SQDSQDSQDQSDQDQSDQSDQSD
+                    </div>
+                    <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
+                </div>
+                <div className='table_holder' style={{marginBottom:20}}>
+                    <h4>POWERPLANT_1 Composition details :</h4>
+                    <Table>
+                        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                            <TableRow>
+                                <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>ssued certificates</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false}>
+                            <TableRow>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn>John Smith</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>2</TableRowColumn>
+                                <TableRowColumn>Randal White</TableRowColumn>
+                                <TableRowColumn>Unemployed</TableRowColumn>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>2</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>4</TableRowColumn>
+                                <TableRowColumn>Steve Brown</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>5</TableRowColumn>
+                                <TableRowColumn>Christopher Nolan</TableRowColumn>
+                                <TableRowColumn>Unemployed</TableRowColumn>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </div>
 
-
-      <div style={producerBody}>
-        <div style={{margin:20}}>
-          <div className='key_holder'>
-              <div>
-                  <strong className='key_label'>KEY: </strong>SQDSQDSQDQSDQDQSDQSDQSD
+                <div className='table_holder'>
+                    <h4>TOKENS</h4>            
+                    <Table>
+                        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                            <TableRow>
+                                <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
+                                <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false}>
+                            <TableRow>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn>John Smith</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>2</TableRowColumn>
+                                <TableRowColumn>Randal White</TableRowColumn>
+                                <TableRowColumn>Unemployed</TableRowColumn>
+                                <TableRowColumn>1</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>2</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>4</TableRowColumn>
+                                <TableRowColumn>Steve Brown</TableRowColumn>
+                                <TableRowColumn>Employed</TableRowColumn>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                            <TableRow>
+                                <TableRowColumn>5</TableRowColumn>
+                                <TableRowColumn>Christopher Nolan</TableRowColumn>
+                                <TableRowColumn>Unemployed</TableRowColumn>
+                                <TableRowColumn>3</TableRowColumn>
+                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </div>
               </div>
-              <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
-          </div>
-          <div className='table_holder' style={{marginBottom:20}}>
-              <h4>POWERPLANT_1 Composition details :</h4>
-              <Table>
-                  <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                      <TableRow>
-                          <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>ssued certificates</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
-                      </TableRow>
-                  </TableHeader>
-                  <TableBody displayRowCheckbox={false}>
-                      <TableRow>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn>John Smith</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>2</TableRowColumn>
-                          <TableRowColumn>Randal White</TableRowColumn>
-                          <TableRowColumn>Unemployed</TableRowColumn>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>2</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>4</TableRowColumn>
-                          <TableRowColumn>Steve Brown</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>5</TableRowColumn>
-                          <TableRowColumn>Christopher Nolan</TableRowColumn>
-                          <TableRowColumn>Unemployed</TableRowColumn>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                  </TableBody>
-              </Table>
-          </div>
 
-          <div className='table_holder'>
-              <h4>TOKENS</h4>            
-              <Table>
-                  <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                      <TableRow>
-                          <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
-                      </TableRow>
-                  </TableHeader>
-                  <TableBody displayRowCheckbox={false}>
-                      <TableRow>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn>John Smith</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>2</TableRowColumn>
-                          <TableRowColumn>Randal White</TableRowColumn>
-                          <TableRowColumn>Unemployed</TableRowColumn>
-                          <TableRowColumn>1</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>2</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>4</TableRowColumn>
-                          <TableRowColumn>Steve Brown</TableRowColumn>
-                          <TableRowColumn>Employed</TableRowColumn>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                      <TableRow>
-                          <TableRowColumn>5</TableRowColumn>
-                          <TableRowColumn>Christopher Nolan</TableRowColumn>
-                          <TableRowColumn>Unemployed</TableRowColumn>
-                          <TableRowColumn>3</TableRowColumn>
-                          <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                      </TableRow>
-                  </TableBody>
-              </Table>
-          </div>
-        </div>
-
-      </div>
-      
-     
-    </Paper>
-  )
+            </div>
+            
+          
+          </Paper>
+        )
+  }
+ 
 };
 
 const mapStateToProps = (state) => ({
-  user: state.auth.user,
+  tokens: state.tokens.powerPlantsTokens,
+  powerPlants: state.powerPlants,
+  owner: state.owner,
+  selectedPowerPlant: state.ui.selectedPowerPlant
 })
 
+let actions = {
+  getPowerPlants
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  actions
 )(Home);

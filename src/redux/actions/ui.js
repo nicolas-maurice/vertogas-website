@@ -25,3 +25,10 @@ export const setUserBoxVisibility = (isOpen) => ({
   type: SET_USER_BOX_VISIBILITY,
   payload: isOpen,
 });
+
+
+export const SELECT_POWER_PLANT = "SELECT_POWER_PLANT";
+export const selectPowerPlant=(powerPlant)=>({
+  type:SELECT_POWER_PLANT,
+  payload: powerPlant
+})

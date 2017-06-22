@@ -11,7 +11,7 @@ import {
 import ui from './ui';
 import auth from './auth';
 import logs from './logs'
-import powerPlans from './powerPlants'
+import powerPlants from './powerPlants'
 import tokens from './tokens'
 import owner from './owner';
 
@@ -20,7 +20,7 @@ const reducer = combineReducers({
   ui,
   routing,
   tokens,
-  powerPlans,
+  powerPlants,
   logs,
   auth,
   owner

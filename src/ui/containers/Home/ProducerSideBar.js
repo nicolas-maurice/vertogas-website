@@ -31,6 +31,47 @@ const styles = {
 
 const COLORS = ['#FEC61A', '#CD9B00', '#9E7700'];
 
+
+const renderActiveShape = (props) => {
+  const RADIAN = Math.PI / 180;
+  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
+    fill, payload, percent, value } = props;
+  const sin = Math.sin(-RADIAN * midAngle);
+  const cos = Math.cos(-RADIAN * midAngle);
+  const sx = cx + (outerRadius + 10) * cos;
+  const sy = cy + (outerRadius + 10) * sin;
+  const mx = cx + (outerRadius + 30) * cos;
+  const my = cy + (outerRadius + 30) * sin;
+  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
+  const ey = my;
+  const textAnchor = cos >= 0 ? 'start' : 'end';
+
+  console.log(props)
+
+  return (
+    <g>
+      <text x={cx} y={cy-10} dy={8} textAnchor="middle" fill="#fff">
+        {percent*100}%
+      </text>
+
+      <text x={cx} y={cy+10} dy={8} textAnchor="middle" fill="#fff">
+        {payload.name}
+      </text>
+      <Sector
+        cx={cx}
+        cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+      />
+     
+    </g>
+  );
+};
+
+
 const ProducerSideBar = (props) => {
   const { open, children } = props;
   return (
@@ -59,11 +100,19 @@ color: "#FFFFFF"}}>
 
       	<PieChart width={300} height={300} style={{margin:"auto"}}>
           <Pie 
-            data={data} 
+            data={data}
+            activeIndex={1}
+            activeShape={renderActiveShape} 
             cx="50%" 
             cy="50%" 
-            innerRadius={60}
+            innerRadius={40}
             outerRadius={80} 
+
+            startAngle={90}
+            endAngle={-360}
+
+            //isAnimationActive={false}
+
             fill="#8884d8">
             {
               data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)

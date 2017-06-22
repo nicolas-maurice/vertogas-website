@@ -54,14 +54,15 @@ const Home = (props) => {
               <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
           </div>
           <div className='table_holder' style={{marginBottom:20}}>
+              <h4>POWERPLANT_1 Composition details :</h4>
               <Table>
                   <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                       <TableRow>
-                          <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>TYPE</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>ssued certificates</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
                       </TableRow>
                   </TableHeader>
                   <TableBody displayRowCheckbox={false}>
@@ -105,13 +106,14 @@ const Home = (props) => {
           </div>
 
           <div className='table_holder'>
+              <h4>TOKENS</h4>            
               <Table>
                   <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                       <TableRow>
                           <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
                           <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
                           <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
-                          <TableHeaderColumn className='table_header'>TYPE</TableHeaderColumn>
+                          <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
                           <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
                       </TableRow>
                   </TableHeader>

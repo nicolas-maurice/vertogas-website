@@ -47,9 +47,9 @@ function createAppSaga(APIManager) {
     while (true) {
      
         
-      //yield put(push(LOGIN_ROUTE));
+      yield put(push(LOGIN_ROUTE));
       //yield put(push(CONSUMER));
-      yield put(push(HOME_ROUTE));
+      //yield put(push(HOME_ROUTE));
       
       function* getPowerPlantsCycle() { 
         yield takeLatest(POWER_PLANTS, handleFetch);

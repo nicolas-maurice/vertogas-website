@@ -25,7 +25,7 @@ const styles = {
     color: "#fff",
     borderRadius: 0,
     padding: 20,
-    width: '30%',
+    width: '350px',
     float: 'left',
     height: "100%"
   }

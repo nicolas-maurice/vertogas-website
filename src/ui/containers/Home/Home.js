@@ -29,7 +29,7 @@ import logo from './logo.svg';
 
 const producerBody = {
   float:'left', 
-  width:'70%', 
+  width:'calc(100% - 350px)', 
   height:'100%', 
   backgroundColor:"#F4F4F4"
 }

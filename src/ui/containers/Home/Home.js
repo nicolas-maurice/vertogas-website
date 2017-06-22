@@ -20,7 +20,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TokenStatusButton from '../../components/TokenStatusButton'
-import {getPowerPlants,getPowerPlantsTokens} from '../../../redux/actions';
+import {getPowerPlants,getPowerPlantsTokens,selectPowerPlant} from '../../../redux/actions';
 import {
   white
 } from 'material-ui/styles/colors';
@@ -39,13 +39,17 @@ export class Home extends React.Component {
     this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb');
   }
   render(){
-    const {powerPlants,selectedPowerPlant} = this.props;
+    const {powerPlants,selectedPowerPlant,selectPowerPlant} = this.props;
     if(!selectedPowerPlant){
       return <div> loading</div>
     }
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
-            <ProducerSideBar powerPlants={powerPlants}/>
+            <ProducerSideBar powerPlants={powerPlants}
+                             onChangeSelectedPowerPlant={(selectedP)=>{
+                               selectPowerPlant(selectedP)
+                             }}
+                             selectedPowerPlant={selectedPowerPlant}/>
             <div style={producerBody}>
               <div style={{margin:20}}>
                 <div className='key_holder'>
@@ -139,7 +143,8 @@ const mapStateToProps = (state) => ({
 })
 
 let actions = {
-  getPowerPlants
+  getPowerPlants,
+  selectPowerPlant
 }
 
 export default connect(

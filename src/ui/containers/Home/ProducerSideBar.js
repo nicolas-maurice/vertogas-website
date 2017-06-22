@@ -13,8 +13,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {PieChart, Pie, Sector, Cell} from 'recharts';
 
 import './ProducerSideBar.css';
-const data = [{name: 'Grass', value: 400}, {name: 'Wood', value: 300},
-                  {name: 'Corn', value: 300}];
+
 
 const styles = {
   sidebarProducer: {
@@ -52,7 +51,7 @@ const renderActiveShape = (props) => {
   return (
     <g>
       <text x={cx} y={cy-10} dy={8} textAnchor="middle" fill="#fff">
-        {percent*100}%
+        {value}%
       </text>
 
       <text x={cx} y={cy+10} dy={8} textAnchor="middle" fill="#fff">
@@ -74,54 +73,62 @@ const renderActiveShape = (props) => {
 
 
 const ProducerSideBar = (props) => {
-  const { open, children } = props;
+  const { open, children,powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant } = props;
+  let data = selectedPowerPlant.mix.map((m)=>{
+    return {name:m.biomass.name,value:m.ratio}
+  })
+  console.log(data)
+
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
-          floatingLabelText="Frequency"
-          //onChange={this.handleChange}
-      >
-        <MenuItem value={1} primaryText="Never" />
-        <MenuItem value={2} primaryText="Every Night" />
-        <MenuItem value={3} primaryText="Weeknights" />
-        <MenuItem value={4} primaryText="Weekends" />
-        <MenuItem value={5} primaryText="Weekly" />
+          floatingLabelText={selectedPowerPlant.name}
+          onChange={(e,newValue,selectedObject)=>{
+            onChangeSelectedPowerPlant(selectedObject);
+          }}
+          >
+          {powerPlants.powerPlants.map((powerPlant)=>{
+            return (
+              <MenuItem key = {powerPlant.id} value={powerPlant} primaryText={powerPlant.name} />
+            )
+          })}
       </SelectField>
 
       <h2 style={{
         fontSize: 14,
         color: "#FFFFFF"
-      }}>POWERPLANT_1 DETAILS :</h2>
-
-        <span className="tag Corn">Corn</span>
-        <span className="tag Wood">Wood</span>
-        <span className="tag Grass">Grass</span>
-
+      }}>{selectedPowerPlant.name} DETAILS :</h2>
+        {
+          selectedPowerPlant.mix.map((m)=>{
+            return <span key={m.biomass.id} className="tag Corn">{m.biomass.name}</span>
+          })
+        }
       <p style={{/* Lorem ipsum dolor si: */
                     fontSize: 12,
                     color: "#FFFFFF"}}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit commodi repudiandae amet sed exercitationem, debitis dignissimos fugiat sint beatae omnis facere possimus incidunt explicabo perferendis, dolorem fuga voluptates accusantium at.
+        {selectedPowerPlant.meta_data ? selectedPowerPlant.meta_data : 'Missing desc'}
       </p>
 
 
       	<PieChart width={300} height={300} style={{margin:"auto"}}>
           <Pie 
             data={data}
-            activeIndex={1}
+            dataKey="value"
+            activeIndex={data.indexOf(data.concat().sort((el1,el2)=>el1.value < el2.value)[0])}
             activeShape={renderActiveShape} 
             cx="50%" 
             cy="50%" 
-            innerRadius={40}
-            outerRadius={80} 
-
+            innerRadius={65}
+            outerRadius={100} 
             startAngle={90}
             endAngle={-360}
-
+            legendType='circle'
+            
             //isAnimationActive={false}
 
             fill="#8884d8">
             {
-              data.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+              data.map((entry, index) => <Cell key={entry.name} fill={COLORS[index % COLORS.length]}/>)
             }
           </Pie>
        </PieChart>

@@ -51,6 +51,25 @@ export const getOwnerTokens = (owner) => ({
   },
 })
 
+/* For getting owner tokens */
+export const ALL_TOKENS = 'ALL_TOKENS';
+export const ALL_TOKENS_REQUEST = 'ALL_TOKENS_REQUEST';
+export const ALL_TOKENS_SUCCESS = 'ALL_TOKENS_SUCCESS';
+export const ALL_TOKENS_FAILURE = 'ALL_TOKENS_FAILURE';
+export const ALL_TOKENS_CANCEL = 'ALL_TOKENS_CANCEL';
+
+/**
+ * ownerTokens action creator 
+ */
+export const getAlltoken = () => ({
+  type: ALL_TOKENS,
+  meta: {
+    APIBaseUrl: API_BASE_URL,    
+    resource: TOKENS_RESOURCE,
+    requestType: GET,
+  },
+})
+
 
 /* For getting owner tokens */
 export const POWER_PLANTS_TOKENS = 'POWER_PLANTS_TOKENS';

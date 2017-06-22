@@ -5,6 +5,15 @@
     height: 53px !important;
     width: 193px !important;
 }
+
+.filter_button button > div > div {
+    height: inherit !important;
+}
+
+.filter_button button{
+    height: inherit !important;
+    padding: 10px !important;
+}
 .key_holder{
     width: 100%;
     height: 53px;

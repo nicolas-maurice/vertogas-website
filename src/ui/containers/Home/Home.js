@@ -58,45 +58,9 @@ export class Home extends React.Component {
                     </div>
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>
-                <div className='table_holder' style={{marginBottom:20}}>
-                    <h4>{selectedPowerPlant.name} Composition details :</h4>
-                    <Table>
-                        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                            <TableRow>
-                                <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>ssued certificates</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody displayRowCheckbox={false}>
-                           {
-                             selectedPowerPlant.mix.map((compo,key)=>{
-                               return (
-                                  <TableRow key = {key}>
-                                    <TableRowColumn>{compo.biomass.name}</TableRowColumn>
-                                    <TableRowColumn>{compo.ratio}%</TableRowColumn>
-                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
-                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
-                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
-                                  </TableRow>
-                               )
-                             })
-                           }
-                            <TableRow>
-                                <TableRowColumn>TOTAL</TableRowColumn>
-                                <TableRowColumn>-</TableRowColumn>
-                                <TableRowColumn>100</TableRowColumn>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn>1</TableRowColumn>
-                            </TableRow>
-                        </TableBody>
-                    </Table>
-                </div>
 
                 <div className='table_holder'>
-                    <h4>TOKENS</h4>            
+                    <h4>Certificates</h4>            
                     <Table>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow>

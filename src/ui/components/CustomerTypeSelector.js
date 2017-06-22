@@ -21,7 +21,7 @@ export default class CustomerTypeSelector extends Component {
     const { value, onChange } = this.props
     return (
       <div style={{width:"100%"}}>
-        <div>
+        <div className="customerTypeSelector">
             <div style={{width:"33.33%",float:"left"}}>
               <RaisedButton
                 backgroundColor="#FEC61A"

@@ -75,7 +75,7 @@ const renderActiveShape = (props) => {
 const ProducerSideBar = (props) => {
   const { open, children } = props;
   return (
-    <Paper style={styles.sidebarProducer} zDepth={3}>
+    <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
           floatingLabelText="Frequency"
           //onChange={this.handleChange}

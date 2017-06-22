@@ -48,7 +48,6 @@ const renderActiveShape = (props) => {
   const ey = my;
   const textAnchor = cos >= 0 ? 'start' : 'end';
 
-  console.log(props)
 
   return (
     <g>

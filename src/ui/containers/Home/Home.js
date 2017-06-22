@@ -36,16 +36,19 @@ const producerBody = {
 
 export class Home extends React.Component {
   componentDidMount(){
-    this.props.getPowerPlants(this.props.owner.address);
+    this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb');
+    console.log('component did mount')
   }
   render(){
-    const {powerPlants} = this.props;
+    const {powerPlants,selectedPowerPlant} = this.props;
     console.log(powerPlants)
+    console.log(selectedPowerPlant)
+    if(!selectedPowerPlant){
+      return <div> loading</div>
+    }
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
-
             <ProducerSideBar powerPlants={powerPlants}/>
-
             <div style={producerBody}>
               <div style={{margin:20}}>
                 <div className='key_holder'>
@@ -55,7 +58,7 @@ export class Home extends React.Component {
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>
                 <div className='table_holder' style={{marginBottom:20}}>
-                    <h4>POWERPLANT_1 Composition details :</h4>
+                    <h4>{selectedPowerPlant.name} Composition details :</h4>
                     <Table>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow>
@@ -67,40 +70,25 @@ export class Home extends React.Component {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
+                           {
+                             selectedPowerPlant.mix.map((compo,key)=>{
+                               return (
+                                  <TableRow key = {key}>
+                                    <TableRowColumn>{compo.biomass.name}</TableRowColumn>
+                                    <TableRowColumn>{compo.ratio}%</TableRowColumn>
+                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
+                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
+                                    <TableRowColumn>{compo.ratio}</TableRowColumn>
+                                  </TableRow>
+                               )
+                             })
+                           }
                             <TableRow>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn>John Smith</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>2</TableRowColumn>
-                                <TableRowColumn>Randal White</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
+                                <TableRowColumn>TOTAL</TableRowColumn>
+                                <TableRowColumn>-</TableRowColumn>
+                                <TableRowColumn>100</TableRowColumn>
                                 <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>2</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>4</TableRowColumn>
-                                <TableRowColumn>Steve Brown</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>5</TableRowColumn>
-                                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
+                                <TableRowColumn>1</TableRowColumn>
                             </TableRow>
                         </TableBody>
                     </Table>
@@ -119,41 +107,19 @@ export class Home extends React.Component {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
-                            <TableRow>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn>John Smith</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>2</TableRowColumn>
-                                <TableRowColumn>Randal White</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>2</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>4</TableRowColumn>
-                                <TableRowColumn>Steve Brown</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>5</TableRowColumn>
-                                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
+                            {
+                              selectedPowerPlant.tokens.map((token,key)=>{
+                                return (
+                                  <TableRow key={key}>
+                                    <TableRowColumn>token.certifID</TableRowColumn>
+                                    <TableRowColumn>token.owner</TableRowColumn>
+                                    <TableRowColumn>token.metaData</TableRowColumn>
+                                    <TableRowColumn>token.claimer</TableRowColumn>
+                                    <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                                  </TableRow>
+                                )
+                              })
+                            }
                         </TableBody>
                     </Table>
                 </div>

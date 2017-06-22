@@ -13,6 +13,7 @@ import auth from './auth';
 import logs from './logs'
 import powerPlans from './powerPlants'
 import tokens from './tokens'
+import owner from './owner';
 
 /* Build app reducers */
 const reducer = combineReducers({
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   tokens,
   powerPlans,
   logs,
-  auth
+  auth,
+  owner
 });
 
 export default reducer;

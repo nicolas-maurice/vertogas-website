@@ -7,7 +7,7 @@ import {
 import {
   Link,
 } from 'react-router';
-
+import {setOwner} from '../../../redux/actions'
 import MenuItem from 'material-ui/MenuItem';
 
 const styles = {
@@ -19,24 +19,31 @@ const styles = {
   }
 }
 
-const Menu = ({items, open}) => (
-  <div style={styles.menu}>
-    {
-      items.map(item => (
-        <MenuItem 
-          key={item.name}
-          primaryText={open ? item.name : null}
-          leftIcon={open ? <item.icon /> : null}
-          rightIcon={!open ? <item.icon /> : null}
-          containerElement={<Link to={item.path} />}
-          style={{
-            color: "#fff"
-          }}
-        />
+const Menu = ({items, open,owner,setOwner}) => {
+  console.log(owner)
+  return (<div style={styles.menu}>
+      {
+        items.map(item => (
+          <MenuItem 
+            key={item.name}
+            className = {item.type === owner.ownerType ? 'menu_item_selected':null}
+            primaryText={open ? item.name : null}
+            leftIcon={open ? <item.icon /> : null}
+            rightIcon={!open ? <item.icon /> : null}
+            onClick={()=>{
+               setOwner(owner.address,item.type)
+            }}
+            containerElement={<Link to={item.path} />}
+            style={{
+              color: "#fff"
+            }}
+          />
+        )
       )
-    )}
+    }
   </div>
-)
+  )
+}
 
 Menu.propTypes = {
   open: PropTypes.bool.isRequired,
@@ -44,9 +51,15 @@ Menu.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-  open: state.ui.sidebarOpen
+  open: state.ui.sidebarOpen,
+  owner: state.owner
 });
 
+let actions = {
+  setOwner
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  actions
 )(Menu);

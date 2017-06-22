@@ -28,7 +28,7 @@ import {
 } from '../../actions';
 import {
   HOME_ROUTE,
-  AUTH_LOGIN_ROUTE,
+  LOGIN_ROUTE,
   CONSUMER
 } from '../../../common';
 
@@ -46,8 +46,8 @@ function createAppSaga(APIManager) {
     while (true) {
      
         
-      
-      yield put(push(CONSUMER));
+      yield put(push(LOGIN_ROUTE));
+      //yield put(push(CONSUMER));
       //yield put(push(HOME_ROUTE));
       
       function* getPowerPlantsCycle() { 

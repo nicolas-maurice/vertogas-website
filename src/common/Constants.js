@@ -1,0 +1,4 @@
+export const OWNER_TYPES = {
+    PRODUCER : "PRODUCER",
+    CONSUMER : "CONSUMER"
+}

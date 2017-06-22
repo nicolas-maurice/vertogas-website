@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton';
 import SvgIcon from 'material-ui/SvgIcon';
-
+import {OWNER_TYPES} from '../../common'
 import './CustomerTypeSelector.css';
 
 const ProducerIcon = (props) => (
@@ -25,7 +25,7 @@ export default class CustomerTypeSelector extends Component {
             <div style={{width:"33.33%",float:"left"}}>
               <RaisedButton
                 backgroundColor="#FEC61A"
-                onClick={() => onChange('Producer')}
+                onClick={() => onChange(OWNER_TYPES.PRODUCER)}
                 icon={<ProducerIcon color="#555555" 
                 className="producerBTN"
                 />}
@@ -37,7 +37,7 @@ export default class CustomerTypeSelector extends Component {
             <div style={{width:"33.33%",float:"left"}}>
               <RaisedButton
                 backgroundColor="#fff"
-                onClick={() => onChange('Customer')}
+                onClick={() => onChange(OWNER_TYPES.CONSUMER)}
                 icon={<CustomerIcon color="#555555" 
                 className="producerBTN"
                 />}

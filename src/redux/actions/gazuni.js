@@ -91,4 +91,16 @@ export const getLogs = (token) => ({
 })
 
 
+/* For setting owner address */
+export const SET_OWNER = 'SET_OWNER';
+
+/**
+ * ownerTokens action creator 
+ */
+export const setOwner = (address,type) => ({
+  type: SET_OWNER,
+  payload:{address:address,ownerType:type}
+})
+
+
 export const GAZUNI_ACTION_TYPES = [POWER_PLANTS, OWNER_TOKENS, POWER_PLANTS_TOKENS,LOGS]

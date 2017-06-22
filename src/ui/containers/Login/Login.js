@@ -1,38 +1,27 @@
-import React, { 
-  PropTypes 
-} from 'react';
+import React from 'react';
 import {
   connect,
 } from 'react-redux';
 import {
   push,
 } from 'react-router-redux';
-import { 
-  propTypes, 
-  reduxForm, 
-  Field,
-} from 'redux-form';
+
 import {
-  login,
+  setOwner
 } from '../../../redux/actions';
 import {
-  HOME_ROUTE,
-  AUTH_LOGIN_ROUTE,
+  HOME_ROUTE
 } from '../../../common';
-import compose from 'recompose/compose';
+
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
-import LockIcon from 'material-ui/svg-icons/action/lock-outline';
-import { 
-  Card, 
-  CardActions,
-} from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
-import RaisedButton from 'material-ui/RaisedButton';
-import CircularProgress from 'material-ui/CircularProgress';
 
-import defaultTheme from '../defaultTheme';
+import { 
+  Card,
+} from 'material-ui/Card';
+
+import RaisedButton from 'material-ui/RaisedButton';
 
 import TextInput from '../../components/TextInput';
 import CustomerTypeSelector from '../../components/CustomerTypeSelector';
@@ -81,13 +70,19 @@ export class  Login extends React.Component {
     this.state = {
       showSelectCustomerTypeView:true
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+
+  }
+  handleSubmit(){
+    let type = this.state.type;
+    let blockChain = this.state.blockChain;
+    if(blockChain && blockChain.length > 0){
+      this.props.setOwner(blockChain,type);
+      this.props.push(HOME_ROUTE)
+    }
   }
   render(){
-    const { 
-    handleSubmit, 
-    onSubmit, 
-    onSubmitCustomerType,
-    submitting, 
+    const {
     theme 
   } = this.props;
   
@@ -133,63 +128,39 @@ export class  Login extends React.Component {
         <div>
           ENTER YOUR BLOCKCHAIN KEY BELOW :
         </div>
-        
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div style={prefixedStyles.form}>
+        <div style={prefixedStyles.form}>
             <div style={prefixedStyles.input}>
-              <Field
-                name="password"
-                component={TextInput}
-                type="password"
+              <TextInput
+                name="blockChainKey"
+                type="text"
                 floatingLabelText="BLOCKCHAIN KEY NUMBER"
-                disabled={submitting}
+                onChange={(e,text)=>{
+                  this.setState({
+                    blockChain:text
+                  })
+                }}
               />
             </div>
           </div>
-          <CardActions>
             <RaisedButton
               backgroundColor="#FEC61A"
               label="Validate"
-              disabled={submitting}
-              icon={submitting && <CircularProgress size={20} thickness={2}/>}
+               onClick={this.handleSubmit}
               fullWidth
             />
-          </CardActions>
-        </form>
       </Card>
     </div>
   );
-  }
-  
-}
-
-Login.propTypes = {
-  ...propTypes,
-  theme: PropTypes.object.isRequired,
-  csrfToken: PropTypes.string,
-}
-
-Login.defaultProps = {
-  theme: defaultTheme,
+  } 
 }
 
 const mapStateToProps = (state) => ({
-  csrfToken: state.auth.csrfToken, 
-});
+  
+})
+const actions = {
+  setOwner,
+  push
+}
 
-const onSubmit = (values, dispatch, props) => {
-  //dispatch(login(values, props.form, props.csrfToken))
-  dispatch(push(HOME_ROUTE));
-}; // when dispatching a LOGIN action it triggers a fetch saga
-
-
-const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: "login",
-    onSubmit, 
-  })
-);
-
-export default enhance(Login);
+export default connect(mapStateToProps,actions)(Login);
 

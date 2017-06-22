@@ -10,7 +10,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import {getPowerPlants,getAlltoken} from '../../../redux/actions'
+import {getPowerPlants,getAlltoken,getOwnerTokens} from '../../../redux/actions'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
@@ -28,16 +28,16 @@ export class Consumer extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            allToken:true
+            allToken:false
         }
     }
     componentDidMount(){
-        console.log('did mount')
-        this.props.getAlltoken()
-        //this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb')
+        this.props.getOwnerTokens(this.props.owner.address)
     }
     render(){
-        console.log(this.props.tokens)
+        if(!this.props.tokens.ownerTokens.tokens){
+            return <div>Loading</div>
+        }
         return (
             <div style={{height:'100%', backgroundColor: "#f4f4f4", padding:20}}>
                 <div className='key_holder'>
@@ -76,6 +76,7 @@ export class Consumer extends React.Component{
                             />
                         </RadioButtonGroup>
                     </div>
+
                     <Table>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow>
@@ -87,41 +88,19 @@ export class Consumer extends React.Component{
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
-                            <TableRow>
-                                <TableRowColumn>1</TableRowColumn>
-                                <TableRowColumn>John Smith</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn><BarChart Wood="10%" Grass="30%" Corn="60%" /></TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>2</TableRowColumn>
-                                <TableRowColumn>Randal White</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn><BarChart Wood="80%" Grass="20%" Corn="0" /></TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>3</TableRowColumn>
-                                <TableRowColumn>Stephanie Sanders</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>4</TableRowColumn>
-                                <TableRowColumn>Steve Brown</TableRowColumn>
-                                <TableRowColumn>Employed</TableRowColumn>
-                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
-                            <TableRow>
-                                <TableRowColumn>5</TableRowColumn>
-                                <TableRowColumn>Christopher Nolan</TableRowColumn>
-                                <TableRowColumn>Unemployed</TableRowColumn>
-                                <TableRowColumn><BarChart Wood="30%" Grass="20%" Corn="50%" /></TableRowColumn>
-                                <TableRowColumn><TokenStatusButton/></TableRowColumn>
-                            </TableRow>
+                            {
+                                this.props.tokens.ownerTokens.tokens.map((token,key)=>{
+                                    return (
+                                        <TableRow key={key}>
+                                            <TableRowColumn>{token.certifID}</TableRowColumn>
+                                            <TableRowColumn>{token.owner}</TableRowColumn>
+                                            <TableRowColumn>{token.metaData}</TableRowColumn>
+                                            <TableRowColumn><BarChart Wood="10%" Grass="30%" Corn="60%" /></TableRowColumn>
+                                            <TableRowColumn><TokenStatusButton claimed = {token.isClaimed}/></TableRowColumn>
+                                        </TableRow>
+                                    )
+                                })
+                            }
                         </TableBody>
                     </Table>
                 </div>
@@ -131,10 +110,11 @@ export class Consumer extends React.Component{
 };
 
 const mapStateToProps = (state) => ({
-  tokens: state.tokens
+  tokens: state.tokens,
+  owner: state.owner
 })
 const actions = {
-  getPowerPlants,
+  getOwnerTokens,
   getAlltoken
 };
 export default connect(

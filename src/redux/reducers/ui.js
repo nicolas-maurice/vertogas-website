@@ -3,7 +3,8 @@ import {
   SET_SIDEBAR_VISIBILITY,
   TOGGLE_USER_BOX,
   SET_USER_BOX_VISIBILITY,
-  SELECT_POWER_PLANT
+  SELECT_POWER_PLANT,
+  POWER_PLANTS_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -43,6 +44,15 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       selectedPowerPlant:payload
     }
+    case POWER_PLANTS_SUCCESS:
+      if(payload  && payload.length > 0){
+        return {
+          ...state,
+          selectedPowerPlant: payload[0]
+        }
+      }
+      return state;
+      
 
     default:
       return state;

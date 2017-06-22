@@ -1,0 +1,20 @@
+span.tag {
+    border-radius: 4px;
+    font-family: Lato-Semibold;
+    font-size: 12px;
+    color: #FFFFFF;
+    padding: 2px 5px;
+    margin: 0 3px;
+}
+
+.tag.Corn{
+    background: #9E7700;
+}
+
+.tag.Wood{
+    background: #CD9B00;
+}
+
+.tag.Grass{
+    background: #FEC61A;
+}

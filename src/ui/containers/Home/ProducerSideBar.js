@@ -11,6 +11,8 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {PieChart, Pie, Sector, Cell} from 'recharts';
+
+import './ProducerSideBar.css';
 const data = [{name: 'Grass', value: 400}, {name: 'Wood', value: 300},
                   {name: 'Corn', value: 300}];
 
@@ -23,7 +25,7 @@ const styles = {
     color: "#fff",
     borderRadius: 0,
     padding: 20,
-    width: '30%',
+    width: '350px',
     float: 'left',
     height: "100%"
   }
@@ -92,11 +94,16 @@ const ProducerSideBar = (props) => {
         color: "#FFFFFF"
       }}>POWERPLANT_1 DETAILS :</h2>
 
+        <span className="tag Corn">Corn</span>
+        <span className="tag Wood">Wood</span>
+        <span className="tag Grass">Grass</span>
+
       <p style={{/* Lorem ipsum dolor si: */
-fontSize: 12,
-color: "#FFFFFF"}}>
+                    fontSize: 12,
+                    color: "#FFFFFF"}}>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit commodi repudiandae amet sed exercitationem, debitis dignissimos fugiat sint beatae omnis facere possimus incidunt explicabo perferendis, dolorem fuga voluptates accusantium at.
       </p>
+
 
       	<PieChart width={300} height={300} style={{margin:"auto"}}>
           <Pie 

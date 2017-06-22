@@ -1,3 +1,12 @@
 body{
     margin: 0;
 }
+
+.menu_item_selected{
+    background: #FEC61A !important;
+    color: #404040 !important;
+}
+
+.menu_item_selected svg{
+    fill: #404040 !important; 
+}

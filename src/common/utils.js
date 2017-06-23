@@ -40,7 +40,7 @@ const generateColor = (colorStart,colorEnd,colorCount) => {
 
 	var saida = [];
 	
-	for (i = 0; i < len; i++) {
+	for (var i = 0; i < len; i++) {
 		var c = [];
 		alpha += (1.0/len);
 		

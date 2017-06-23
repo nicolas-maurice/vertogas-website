@@ -5,6 +5,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 
+import generateColor from '../../../common/utils.js';
+
 import {PieChart, Pie, Sector, Cell} from 'recharts';
 
 import './ProducerSideBar.css';
@@ -65,6 +67,10 @@ const ProducerSideBar = (props) => {
   let data = selectedPowerPlant.mix.map((m)=>{
     return {name:m.biomass.name,value:m.ratio}
   })
+
+  let tagColors = generateColor("#FEC61A","#9E7700",selectedPowerPlant.mix.length);
+
+  console.log(tagColors)
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
@@ -85,8 +91,8 @@ const ProducerSideBar = (props) => {
         color: "#FFFFFF"
       }}>{selectedPowerPlant.name} DETAILS :</h2>
         {
-          selectedPowerPlant.mix.map((m)=>{
-            return <span key={m.biomass.id} className="tag Corn">{m.biomass.name}</span>
+          selectedPowerPlant.mix.map((m,index)=>{
+            return <span key={m.biomass.id} className="tag" style={{backgroundColor:`#${tagColors[index]}`}}>{m.biomass.name}</span>
           })
         }
       <p style={{/* Lorem ipsum dolor si: */
@@ -118,7 +124,7 @@ const ProducerSideBar = (props) => {
 
             fill="#8884d8">
             {
-              data.map((entry, index) => <Cell key={entry.name} fill={COLORS[index % COLORS.length]}/>)
+              data.map((entry, index) => <Cell key={entry.name} fill={`#${tagColors[index % tagColors.length]}`}/>)
             }
           </Pie>
        </PieChart>

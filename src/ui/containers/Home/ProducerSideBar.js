@@ -120,6 +120,11 @@ const ProducerSideBar = (props) => {
        </PieChart>
 
 
+       <div>ISSUED CERTFICIATE : 4</div>
+
+       <div>on old : 5</div>
+
+
       <RaisedButton
         label="PRODUCE"
         fullWidth

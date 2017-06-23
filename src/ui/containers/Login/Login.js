@@ -55,7 +55,7 @@ const styles = {
   },
 
   form: {
-    padding: '0 1em 1em 1em'
+    padding: '1em 0 1em 0'
   },
 
   input: {
@@ -139,7 +139,15 @@ export class  Login extends React.Component {
               <TextInput
                 name="blockChainKey"
                 type="text"
-                floatingLabelText="BLOCKCHAIN KEY NUMBER"
+                hintText="BLOCKCHAIN KEY NUMBER"
+                underlineShow={false}
+
+                style={{
+                  background: "#FFFFFF",
+                  fontSize: 16,
+                  color: "#919191",
+                  padding: "0 5px"
+                }}
                 onChange={(e,text)=>{
                   this.setState({
                     blockChain:text

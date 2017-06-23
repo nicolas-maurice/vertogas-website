@@ -191,11 +191,12 @@ const ownerTokensReducer = (state = null, action) => {
     case `${OWNER_TOKENS}_SUCCESS`:
       return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
     case `${OWNER_TOKENS}_FAILURE`:
-      if (action.payload.status === 401) {
+       return mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
+      /*if (action.payload.status === 401) {
         return null;
       } else {
         return state;
-      }    
+      }*/    
     case FETCH_FAILURE:
       if (action.payload.status === 401) {
         return null;

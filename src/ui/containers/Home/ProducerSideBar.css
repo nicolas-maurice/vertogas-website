@@ -23,3 +23,69 @@ span.tag {
     width: 100%;
     margin: 20px;
 }
+
+
+/*Progress button*/
+.progress-button {
+    position: relative;
+    display: inline-block;
+    padding: 0 60px;
+    outline: none;
+    border: none;
+    background: #FFE9A5;
+    color: #222222;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 3;
+
+    border-radius: 4px;
+    width: 100%;
+}
+
+.progress-button[data-style="fill"][data-horizontal] {
+    overflow: hidden;
+}
+
+.progress-button[data-style="fill"][data-horizontal] .content {
+    z-index: 10;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+}
+.progress-button .content {
+    position: relative;
+    display: block;
+}
+
+.progress-button[data-style="fill"][data-horizontal] .content::before, .progress-button[data-style="fill"][data-horizontal] .content::after {
+    top: 100%;
+    right: auto;
+    left: 50%;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.progress-button .progress {
+    background: #FEC61A;
+}
+
+.progress-button[data-horizontal] .progress-inner {
+    top: 0;
+    width: 0;
+    height: 100%;
+    -webkit-transition: width 0.3s, opacity 0.3s;
+    transition: width 0.3s, opacity 0.3s;
+}
+
+.progress-button[disabled], .progress-button[disabled].state-loading {
+    cursor: default;
+}
+
+.progress-button .progress-inner {
+    position: absolute;
+    left: 0;
+    background: #FEC61A;
+}

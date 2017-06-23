@@ -141,12 +141,14 @@ const ProducerSideBar = (props) => {
        </PieChart>
 
        <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {totalIssuedCertificate}</div>
-      <RaisedButton
-        label="PRODUCE"
-        fullWidth
-        backgroundColor="#FEC61A"
-        /*style={{height: 60}}*/
-      />
+
+
+      <button className="progress-button" data-style="fill" data-horizontal="">
+        <span className="content">Submit</span>
+        <span className="progress">
+          <span className="progress-inner" style={{width:"80%"}}></span>
+        </span>
+      </button>
 
 
       

@@ -186,7 +186,6 @@ const allTokenStatusReducer = (state = null, action) => {
 
 /* reducer responsible for ownerTokens management */
 const ownerTokensReducer = (state = null, action) => {
-    console.log(action)
   switch (action.type) {
     case `${OWNER_TOKENS}_SUCCESS`:
       return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[13].concat(mockPowerPlantsTokens[14]).concat(mockPowerPlantsTokens[15]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
@@ -253,11 +252,6 @@ const powerPlantsTokensReducer = (state = null, action) => {
       } else {
         return state;
       } 
-    case POWER_PLANTS_SUCCESS:
-      let pp = action.payload[0].id
-      return mockPowerPlantsTokens[pp];
-    case SELECT_POWER_PLANT:
-        return mockPowerPlantsTokens[action.payload.id];
     default:
       return state;
   }

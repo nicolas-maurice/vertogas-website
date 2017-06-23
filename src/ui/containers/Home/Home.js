@@ -29,10 +29,10 @@ export class Home extends React.Component {
     this.renderCertificates = this.renderCertificates.bind(this);
   }
   componentDidMount(){
-    this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb');
+    this.props.getPowerPlants('0x0084313bb3d4326a50f6361aa193905b3f165359');
   }
   renderCertificates(){
-    if(!this.props.tokens.tokens){
+    if(!this.props.selectedPowerPlant.tokens){
       return <div>Loading</div>
     }
     return (
@@ -49,7 +49,7 @@ export class Home extends React.Component {
               </TableHeader>
               <TableBody displayRowCheckbox={false}>
                   {
-                      this.props.tokens.tokens.map((token,key)=>{
+                      this.props.selectedPowerPlant.tokens.map((token,key)=>{
                         return (
                           <TableRow key={key}>
                             <TableRowColumn>{token.certifID}</TableRowColumn>
@@ -67,7 +67,6 @@ export class Home extends React.Component {
   }
   render(){
     const {powerPlants,selectedPowerPlant,selectPowerPlant,getPowerPlantsTokens,tokens} = this.props;
-    console.log(tokens)
     if(!selectedPowerPlant){
       return <div> loading</div>
     }

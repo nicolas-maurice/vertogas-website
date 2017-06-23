@@ -34,7 +34,6 @@ export class Consumer extends React.Component{
     }
     renderTokens(){
         let data = this.props.tokens.ownerTokens.tokens;
-        console.log(data)
         if(this.state.allToken){
             data = this.props.tokens.all.tokens;
         }

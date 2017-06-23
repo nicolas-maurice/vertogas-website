@@ -25,14 +25,38 @@ export class Consumer extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            allToken:false
+            allToken:true
         }
     }
     componentDidMount(){
+        this.props.getAlltoken()
         this.props.getOwnerTokens(this.props.owner.address)
     }
+    renderTokens(){
+        let data = this.props.tokens.ownerTokens.tokens;
+        console.log(data)
+        if(this.state.allToken){
+            data = this.props.tokens.all.tokens;
+        }
+        if(!data){
+            return null;
+        }
+        return (
+            data.map((token,key)=>{
+                return (
+                    <TableRow key={key}>
+                        <TableRowColumn>{token.certifID}</TableRowColumn>
+                        <TableRowColumn>{token.owner}</TableRowColumn>
+                        <TableRowColumn>{token.issuedDate}</TableRowColumn>
+                        <TableRowColumn><BarChart Wood="40%" Grass="30%" Corn="30%" /></TableRowColumn>
+                        <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                    </TableRow>
+                )
+            })
+        )
+    }
     render(){
-        if(!this.props.tokens.ownerTokens.tokens){
+        if(!this.props.tokens.all.tokens){
             return <div>Loading</div>
         }
         return (
@@ -74,7 +98,7 @@ export class Consumer extends React.Component{
                         </RadioButtonGroup>
                     </div>
 
-                    <Table>
+                    <Table selectable={false}>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow>
                                 <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
@@ -86,17 +110,7 @@ export class Consumer extends React.Component{
                         </TableHeader>
                         <TableBody displayRowCheckbox={false}>
                             {
-                                this.props.tokens.ownerTokens.tokens.map((token,key)=>{
-                                    return (
-                                        <TableRow key={key}>
-                                            <TableRowColumn>{token.certifID}</TableRowColumn>
-                                            <TableRowColumn>{token.owner}</TableRowColumn>
-                                            <TableRowColumn>{token.metaData}</TableRowColumn>
-                                            <TableRowColumn><BarChart Wood="10%" Grass="30%" Corn="60%" /></TableRowColumn>
-                                            <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
-                                        </TableRow>
-                                    )
-                                })
+                                this.renderTokens()
                             }
                         </TableBody>
                     </Table>

@@ -38,7 +38,7 @@ export class Home extends React.Component {
     return (
       <div className='table_holder'>
           <h4>Certificates</h4>            
-          <Table>
+          <Table selectable={false}>
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                   <TableRow>
                       <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>

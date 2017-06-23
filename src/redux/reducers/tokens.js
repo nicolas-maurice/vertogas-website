@@ -37,7 +37,7 @@ const mockPowerPlantsTokens={
             "id": 13, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'12/16/2017'
         }, 
         {
@@ -66,7 +66,7 @@ const mockPowerPlantsTokens={
             "id": 11, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'12/19/2017'
         }, 
         {
@@ -84,7 +84,7 @@ const mockPowerPlantsTokens={
             "id": 13, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'10/19/2017'
         }, 
         {
@@ -93,7 +93,7 @@ const mockPowerPlantsTokens={
             "id": 14, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'11/19/2017'
         }
     ],
@@ -104,7 +104,7 @@ const mockPowerPlantsTokens={
             "id": 10, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'10/17/2017'
         }, 
         {
@@ -113,7 +113,7 @@ const mockPowerPlantsTokens={
             "id": 11, 
             "isClaimed": false, 
             "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-            "owner": "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad",
+            "owner": "0x0084313bb3d4326a50f6361aa193905b3f165359",
             "issuedDate":'10/19/2017'
         }, 
         {
@@ -136,13 +136,14 @@ const mockPowerPlantsTokens={
 const allTokensReducer = (state = null, action) => {
   switch (action.type) {
     case `${ALL_TOKENS}_SUCCESS`:
-      return action.payload;
+      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]);
     case `${ALL_TOKENS}_FAILURE`:
-      if (action.payload.status === 401) {
+         return mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]);
+      /*if (action.payload.status === 401) {
         return null;
       } else {
         return state;
-      }
+      }*/
     default:
       return state;
   }
@@ -185,9 +186,10 @@ const allTokenStatusReducer = (state = null, action) => {
 
 /* reducer responsible for ownerTokens management */
 const ownerTokensReducer = (state = null, action) => {
+    console.log(action)
   switch (action.type) {
     case `${OWNER_TOKENS}_SUCCESS`:
-      return action.payload;
+      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
     case `${OWNER_TOKENS}_FAILURE`:
       if (action.payload.status === 401) {
         return null;
@@ -252,8 +254,6 @@ const powerPlantsTokensReducer = (state = null, action) => {
       } 
     case POWER_PLANTS_SUCCESS:
       let pp = action.payload[0].id
-      console.log(pp)
-      console.log('hey i am here')
       return mockPowerPlantsTokens[pp];
     case SELECT_POWER_PLANT:
         return mockPowerPlantsTokens[action.payload.id];

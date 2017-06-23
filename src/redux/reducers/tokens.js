@@ -12,7 +12,7 @@ import {
 
 
 const mockPowerPlantsTokens={
-    12:[
+    13:[
         {
             "certifID": "0x9c397621ec102b09a305cf98ffa8dccf95b5187b2d669f86ca6932e2337ef065", 
             "claimer": null, 
@@ -50,7 +50,7 @@ const mockPowerPlantsTokens={
             "issuedDate":'12/19/2017'
         }
     ],
-    13:[
+    14:[
          {
             "certifID": "0x67258042d3e6b7d78b88e356d2b6c54b8e0c0caec428efe0ff96850328033693", 
             "claimer": null, 
@@ -97,7 +97,7 @@ const mockPowerPlantsTokens={
             "issuedDate":'11/19/2017'
         }
     ],
-    14:[
+    15:[
          {
             "certifID": "0x67258042d3e6b7d78b88e356d2b6c54b8e0c0caec428efe0ff96850328033693", 
             "claimer": null, 
@@ -136,9 +136,9 @@ const mockPowerPlantsTokens={
 const allTokensReducer = (state = null, action) => {
   switch (action.type) {
     case `${ALL_TOKENS}_SUCCESS`:
-      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]);
+      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[13].concat(mockPowerPlantsTokens[14]).concat(mockPowerPlantsTokens[15]);
     case `${ALL_TOKENS}_FAILURE`:
-         return mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]);
+         return mockPowerPlantsTokens[13].concat(mockPowerPlantsTokens[14]).concat(mockPowerPlantsTokens[15]);
       /*if (action.payload.status === 401) {
         return null;
       } else {
@@ -189,9 +189,9 @@ const ownerTokensReducer = (state = null, action) => {
     console.log(action)
   switch (action.type) {
     case `${OWNER_TOKENS}_SUCCESS`:
-      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
+      return action.payload.length > 0 ? action.payload : mockPowerPlantsTokens[13].concat(mockPowerPlantsTokens[14]).concat(mockPowerPlantsTokens[15]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
     case `${OWNER_TOKENS}_FAILURE`:
-       return mockPowerPlantsTokens[12].concat(mockPowerPlantsTokens[13]).concat(mockPowerPlantsTokens[14]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
+       return mockPowerPlantsTokens[13].concat(mockPowerPlantsTokens[14]).concat(mockPowerPlantsTokens[15]).filter((el)=>el.owner === "0x00ee8d36ca11e303edcbb737c952b0e31b40c7ad");
       /*if (action.payload.status === 401) {
         return null;
       } else {

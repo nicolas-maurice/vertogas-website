@@ -18,13 +18,13 @@ import {
 
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
-
+import {Motion, spring} from 'react-motion';
 import { 
   Card,
 } from 'material-ui/Card';
 
 import RaisedButton from 'material-ui/RaisedButton';
-
+import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import TextInput from '../../components/TextInput';
 import CustomerTypeSelector from '../../components/CustomerTypeSelector';
 
@@ -41,12 +41,15 @@ const styles = {
   },
 
   card: {
-    minWidth: 300,
+    width: 614,
+    height:377,
     background: "rgba(43,43,43,0.57)",
     boxShadow: "0 2px 4px 0 rgba(0,0,0,0.50)",
     color: "#fff",
     padding: "82px 130px",
-    textAlign: "center"
+    textAlign: "center",
+    position:'relative',
+    overflow:'hidden'
   },
 
   avatar: {
@@ -101,70 +104,94 @@ export class  Login extends React.Component {
     prefixedStyles.form = prefix(styles.form);
     prefixedStyles.input = prefix(styles.input);
   }
-  if(this.state.showSelectCustomerTypeView){
     return (
       <div style={prefixedStyles.body}>
         <div className="backgroundContainer">
           <img src={background} alt="" className="backgroundPicture"/>
         </div>
-          
-        <Card style={prefixedStyles.card}>
-          <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
-          <div style={{marginBottom:20}}>YOU ARE A :</div>
-            <div style={prefixedStyles.form}>
-              <div style={prefixedStyles.input}>
-                <CustomerTypeSelector onChange={(value)=>{
-                    this.setState({
-                      showSelectCustomerTypeView:false,
-                      type:value
-                    })
-                  }}/>
+            <Card style={prefixedStyles.card}>
+               <Motion style={{x: spring(this.state.showSelectCustomerTypeView ? 0 : 1)}}>
+                 {({x})=>
+                     
+                    <div onClick={()=>{this.setState({showSelectCustomerTypeView:true})}} style={{position:'absolute',top:20,left:20,opacity:x,zIndex:1000,cursor:'pointer'}}>
+                      <ArrowBack color='white'/>
+                    </div>
+                 }
+                 </Motion>
+              
+              <Motion style={{x: spring(this.state.showSelectCustomerTypeView ? 0 : -100)}}>
+                {({x}) =>
+              <div style={{
+                            position:'absolute',
+                            top:0,
+                            left:`${x}%`,
+                            width:'calc(100% - 220px)',
+                            bottom:0,
+                            padding:'82px 110px'
+                         }}>
+                <div style={prefixedStyles.avatar}>SELECT AMONG THE TWO CHOICES BELOW? </div>
+                <div style={{marginBottom:20}}>YOU ARE A :</div>
+                  <div style={prefixedStyles.form}>
+                    <div style={prefixedStyles.input}>
+                      <CustomerTypeSelector onChange={(value)=>{
+                          this.setState({
+                            showSelectCustomerTypeView:false,
+                            type:value
+                          })
+                        }}/>
+                    </div>
+                  </div>
               </div>
-            </div>
-        </Card>
+              }
+        </Motion>
+              <Motion style={{x: spring(this.state.showSelectCustomerTypeView ? 100 : 0)}}>
+                {({x}) =>
+              <div style={{
+                            position:'absolute',
+                              top:0,
+                              left:`${x}%`,
+                              width:'calc(100% - 220px)',
+                              bottom:0,
+                              padding:'115px 110px'
+                        }}>
+                <div>
+                    ENTER YOUR BLOCKCHAIN KEY BELOW :
+                  </div>
+                  <div style={prefixedStyles.form}>
+                      <div style={prefixedStyles.input}>
+                        <TextInput
+                          name="blockChainKey"
+                          type="text"
+                          hintText="BLOCKCHAIN KEY NUMBER"
+                          underlineShow={false}
+
+                          style={{
+                            background: "#FFFFFF",
+                            fontSize: 16,
+                            color: "#919191",
+                            padding: "0 5px"
+                          }}
+                          onChange={(e,text)=>{
+                            this.setState({
+                              blockChain:text
+                            })
+                          }}
+                        />
+                      </div>
+                    </div>
+                      <RaisedButton
+                        backgroundColor="#FEC61A"
+                        label="Validate"
+                        onClick={this.handleSubmit}
+                        fullWidth
+                      />
+              </div>
+               }
+        </Motion>
+            </Card>
+         
       </div>
     )
-  }
-  return (
-    <div style={prefixedStyles.body}>
-      <div className="backgroundContainer">
-        <img src={background} alt="" className="backgroundPicture"/>
-      </div>
-      <Card style={prefixedStyles.card}>
-        <div>
-          ENTER YOUR BLOCKCHAIN KEY BELOW :
-        </div>
-        <div style={prefixedStyles.form}>
-            <div style={prefixedStyles.input}>
-              <TextInput
-                name="blockChainKey"
-                type="text"
-                hintText="BLOCKCHAIN KEY NUMBER"
-                underlineShow={false}
-
-                style={{
-                  background: "#FFFFFF",
-                  fontSize: 16,
-                  color: "#919191",
-                  padding: "0 5px"
-                }}
-                onChange={(e,text)=>{
-                  this.setState({
-                    blockChain:text
-                  })
-                }}
-              />
-            </div>
-          </div>
-            <RaisedButton
-              backgroundColor="#FEC61A"
-              label="Validate"
-               onClick={this.handleSubmit}
-              fullWidth
-            />
-      </Card>
-    </div>
-  );
   } 
 }
 

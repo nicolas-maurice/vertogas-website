@@ -74,9 +74,20 @@ const ProducerSideBar = (props) => {
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
-          floatingLabelText={selectedPowerPlant.name}
+          hintText={selectedPowerPlant.name}
+          underlineStyle={{display:'none'}}
           onChange={(e,newValue,selectedObject)=>{
             onChangeSelectedPowerPlant(selectedObject);
+          }}
+
+          hintStyle={{
+            color: "#3C4144"
+          }}
+
+          style={{
+            backgroundColor: "#fff",
+            color: "#3C4144",
+            paddingLeft: 10
           }}
           >
           {powerPlants.powerPlants.map((powerPlant)=>{

@@ -3,11 +3,11 @@
     width: 62px !important;
 }
 
-button > div > div {
+.CustomerTypeSelector button > div > div {
     height: inherit !important;
 }
 
-button{
+.CustomerTypeSelector button{
     height: inherit !important;
     padding: 10px !important;
 }

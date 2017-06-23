@@ -18,3 +18,8 @@ span.tag {
 .tag.Grass{
     background: #FEC61A;
 }
+.issuedcertificatesLabel{
+    text-align: center;
+    width: 100%;
+    margin: 20px;
+}

@@ -13,7 +13,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TokenStatusButton from '../../components/TokenStatusButton'
-import {getPowerPlants,selectPowerPlant} from '../../../redux/actions';
+import {getPowerPlants,selectPowerPlant,getPowerPlantsTokens} from '../../../redux/actions';
 
 
 const producerBody = {
@@ -24,19 +24,59 @@ const producerBody = {
 }
 
 export class Home extends React.Component {
+  constructor(props){
+    super(props);
+    this.renderCertificates = this.renderCertificates.bind(this);
+  }
   componentDidMount(){
     this.props.getPowerPlants('0x13377b14b615fff59c8e66288c32365d38181cdb');
   }
+  renderCertificates(){
+    if(!this.props.tokens.tokens){
+      return <div>Loading</div>
+    }
+    return (
+      <div className='table_holder'>
+          <h4>Certificates</h4>            
+          <Table>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                  <TableRow>
+                      <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
+                  </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false}>
+                  {
+                      this.props.tokens.tokens.map((token,key)=>{
+                        return (
+                          <TableRow key={key}>
+                            <TableRowColumn>{token.certifID}</TableRowColumn>
+                            <TableRowColumn>{token.owner}</TableRowColumn>
+                            <TableRowColumn>{token.issuedDate}</TableRowColumn>
+                            <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                          </TableRow>
+                        )
+                      })
+                  }
+              </TableBody>
+          </Table>
+      </div>
+    )
+  }
   render(){
-    const {powerPlants,selectedPowerPlant,selectPowerPlant} = this.props;
+    const {powerPlants,selectedPowerPlant,selectPowerPlant,getPowerPlantsTokens,tokens} = this.props;
+    console.log(tokens)
     if(!selectedPowerPlant){
       return <div> loading</div>
     }
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
             <ProducerSideBar powerPlants={powerPlants}
+                             totalIssuedCertificate={tokens.tokens ? tokens.tokens.length : 0}
                              onChangeSelectedPowerPlant={(selectedP)=>{
-                               selectPowerPlant(selectedP)
+                               selectPowerPlant(selectedP);
                              }}
                              selectedPowerPlant={selectedPowerPlant}/>
             <div style={producerBody}>
@@ -47,34 +87,9 @@ export class Home extends React.Component {
                     </div>
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>
-
-                <div className='table_holder'>
-                    <h4>Certificates</h4>            
-                    <Table>
-                        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                            <TableRow>
-                                <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody displayRowCheckbox={false}>
-                            {
-                              selectedPowerPlant.tokens.map((token,key)=>{
-                                return (
-                                  <TableRow key={key}>
-                                    <TableRowColumn>token.certifID</TableRowColumn>
-                                    <TableRowColumn>token.owner</TableRowColumn>
-                                    <TableRowColumn>token.metaData</TableRowColumn>
-                                    <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
-                                  </TableRow>
-                                )
-                              })
-                            }
-                        </TableBody>
-                    </Table>
-                </div>
+                {
+                  this.renderCertificates()
+                }
               </div>
 
             </div>
@@ -95,7 +110,8 @@ const mapStateToProps = (state) => ({
 
 let actions = {
   getPowerPlants,
-  selectPowerPlant
+  selectPowerPlant,
+  getPowerPlantsTokens
 }
 
 export default connect(

@@ -16,7 +16,6 @@ import NotFound from './ui/containers/NotFound/NotFound';
 
 import {
   HOME_ROUTE,
-  AUTH,
   LOGIN_ROUTE,
   CONSUMER
 } from './common';

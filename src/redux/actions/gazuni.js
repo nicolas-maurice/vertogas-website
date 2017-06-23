@@ -2,9 +2,7 @@
  * Authentification actions
  */
 import {
-  GET,
-  POST,
-  PUT,
+  GET
 } from '../../APIManager';
 import {
   API_BASE_URL,

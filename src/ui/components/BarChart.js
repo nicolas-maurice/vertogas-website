@@ -1,35 +1,13 @@
 import React, { Component } from 'react'
-import RaisedButton from 'material-ui/RaisedButton';
-import SvgIcon from 'material-ui/SvgIcon';
 
+const labels = ["Wood","Grass","Corn" ]
 
-const predefinedStyle = {
-    BarChart : {
-        width: "100%",
-        height: 11
-    }
-}
-
-const labels = ["Wood",
-"Grass",
-"Corn" ]
-
-const backgroundColors = ["#FEC61A",
-"#CD9B00",
-"#9E7700" ]
+const backgroundColors = ["#FEC61A","#CD9B00","#9E7700" ]
 
 export default class BarChart extends Component {
 
-    renderTypes(types){
-
-        for(var key in types) {
-            if(types.hasOwnProperty(key)) {
-                <div>types[key]</div>
-            }
-        }
-    }
     render() {
-        const { value, onChange, Wood, Grass, Corn } = this.props
+        const {Wood, Grass, Corn } = this.props
 
         const types = [
             Wood,Grass,Corn

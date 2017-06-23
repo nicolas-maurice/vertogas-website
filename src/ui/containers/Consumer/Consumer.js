@@ -10,7 +10,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import {getPowerPlants,getAlltoken,getOwnerTokens} from '../../../redux/actions'
+import {getAlltoken,getOwnerTokens} from '../../../redux/actions'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
@@ -18,9 +18,6 @@ import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import BarChart from '../../components/BarChart'
 import './Consumer.css'
-import {
-  white
-} from 'material-ui/styles/colors';
 
 
 
@@ -96,7 +93,7 @@ export class Consumer extends React.Component{
                                             <TableRowColumn>{token.owner}</TableRowColumn>
                                             <TableRowColumn>{token.metaData}</TableRowColumn>
                                             <TableRowColumn><BarChart Wood="10%" Grass="30%" Corn="60%" /></TableRowColumn>
-                                            <TableRowColumn><TokenStatusButton claimed = {token.isClaimed}/></TableRowColumn>
+                                            <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
                                         </TableRow>
                                     )
                                 })

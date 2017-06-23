@@ -20,13 +20,12 @@ const styles = {
 }
 
 const Menu = ({items, open,owner,setOwner}) => {
-  console.log(owner)
   return (<div style={styles.menu}>
       {
         items.map(item => (
           <MenuItem 
             key={item.name}
-            className = {item.type === owner.ownerType ? 'menu_item_selected':null}
+            className={item.type === owner.ownerType ? 'menu_item_selected':null}
             primaryText={open ? item.name : null}
             leftIcon={open ? <item.icon /> : null}
             rightIcon={!open ? <item.icon /> : null}

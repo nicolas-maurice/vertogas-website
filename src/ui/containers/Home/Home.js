@@ -2,14 +2,7 @@ import React from 'react'
 import { 
   connect
 } from 'react-redux';
-import { 
-  Card, 
-  CardTitle, 
-  CardHeader, 
-  CardText
-} from 'material-ui/Card';
 import Paper from 'material-ui/Paper'
-import Avatar from 'material-ui/Avatar'
 import ProducerSideBar from './ProducerSideBar'
 import {
   Table,
@@ -20,12 +13,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import TokenStatusButton from '../../components/TokenStatusButton'
-import {getPowerPlants,getPowerPlantsTokens,selectPowerPlant} from '../../../redux/actions';
-import {
-  white
-} from 'material-ui/styles/colors';
+import {getPowerPlants,selectPowerPlant} from '../../../redux/actions';
 
-import logo from './logo.svg';
 
 const producerBody = {
   float:'left', 
@@ -67,7 +56,6 @@ export class Home extends React.Component {
                                 <TableHeaderColumn className='table_header'>Certif ID</TableHeaderColumn>
                                 <TableHeaderColumn className='table_header'>OWNER</TableHeaderColumn>
                                 <TableHeaderColumn className='table_header'>Issued Date</TableHeaderColumn>
-                                <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
                                 <TableHeaderColumn className='table_header'>STATUS</TableHeaderColumn>
                             </TableRow>
                         </TableHeader>
@@ -79,7 +67,6 @@ export class Home extends React.Component {
                                     <TableRowColumn>token.certifID</TableRowColumn>
                                     <TableRowColumn>token.owner</TableRowColumn>
                                     <TableRowColumn>token.metaData</TableRowColumn>
-                                    <TableRowColumn>token.claimer</TableRowColumn>
                                     <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
                                   </TableRow>
                                 )

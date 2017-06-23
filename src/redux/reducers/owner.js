@@ -1,9 +1,5 @@
-import { 
-  combineReducers 
-} from 'redux';
 import {
   SET_OWNER,
-  FETCH_FAILURE,
 } from '../actions';
 import {OWNER_TYPES} from '../../common'
 let initialState ={
@@ -23,6 +19,4 @@ const owner = (state = initialState, action) => {
       return state;
   }
 };
-
-/* Combine all reducers into the auth reducers */
 export default owner

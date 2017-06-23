@@ -2,8 +2,7 @@ import {
   combineReducers 
 } from 'redux';
 import {
-  LOGS,
-  FETCH_FAILURE,
+  LOGS
 } from '../actions';
 /**
  * Reducers related to logs handling

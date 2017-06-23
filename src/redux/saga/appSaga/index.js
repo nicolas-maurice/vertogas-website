@@ -1,8 +1,6 @@
 import {
   put,
-  take,
   call,
-  fork,
   takeEvery,
   takeLatest,
   race,
@@ -14,11 +12,6 @@ import {
 import createFetchSaga from './fetchSaga';
 
 import {
-  loadAuth,
-  LOAD_AUTH,
-  LOGIN,
-  LOGOUT,
-  FETCH_FAILURE,
   POWER_PLANTS,
   AUTH_ACTION_TYPES,
   GAZUNI_ACTION_TYPES,
@@ -28,9 +21,9 @@ import {
   ALL_TOKENS
 } from '../../actions';
 import {
-  HOME_ROUTE,
+ // HOME_ROUTE,
   LOGIN_ROUTE,
-  CONSUMER
+ // CONSUMER
 } from '../../../common';
 
 /**

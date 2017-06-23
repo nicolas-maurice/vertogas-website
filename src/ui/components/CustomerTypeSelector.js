@@ -18,7 +18,7 @@ const CustomerIcon = (props) => (
 
 export default class CustomerTypeSelector extends Component {
   render() {
-    const { value, onChange } = this.props
+    const { onChange } = this.props
     return (
       <div style={{width:"100%"}}>
         <div className="customerTypeSelector">

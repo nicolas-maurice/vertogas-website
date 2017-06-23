@@ -1,10 +1,5 @@
-import React, { 
-  PropTypes, 
-} from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
-import { 
-  connect, 
-} from 'react-redux';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -34,19 +29,12 @@ const COLORS = ['#FEC61A', '#CD9B00', '#9E7700'];
 
 
 const renderActiveShape = (props) => {
-  const RADIAN = Math.PI / 180;
-  const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle,
-    fill, payload, percent, value } = props;
-  const sin = Math.sin(-RADIAN * midAngle);
-  const cos = Math.cos(-RADIAN * midAngle);
-  const sx = cx + (outerRadius + 10) * cos;
-  const sy = cy + (outerRadius + 10) * sin;
-  const mx = cx + (outerRadius + 30) * cos;
-  const my = cy + (outerRadius + 30) * sin;
-  const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-  const ey = my;
-  const textAnchor = cos >= 0 ? 'start' : 'end';
 
+  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle,
+    fill, payload, value } = props;
+
+
+  
 
   return (
     <g>
@@ -73,12 +61,10 @@ const renderActiveShape = (props) => {
 
 
 const ProducerSideBar = (props) => {
-  const { open, children,powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant } = props;
+  const {powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant } = props;
   let data = selectedPowerPlant.mix.map((m)=>{
     return {name:m.biomass.name,value:m.ratio}
   })
-  console.log(data)
-
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
@@ -89,7 +75,7 @@ const ProducerSideBar = (props) => {
           >
           {powerPlants.powerPlants.map((powerPlant)=>{
             return (
-              <MenuItem key = {powerPlant.id} value={powerPlant} primaryText={powerPlant.name} />
+              <MenuItem key={powerPlant.id} value={powerPlant} primaryText={powerPlant.name} />
             )
           })}
       </SelectField>

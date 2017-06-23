@@ -74,9 +74,20 @@ const ProducerSideBar = (props) => {
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
-          floatingLabelText={selectedPowerPlant.name}
+          hintText={selectedPowerPlant.name}
+          underlineStyle={{display:'none'}}
           onChange={(e,newValue,selectedObject)=>{
             onChangeSelectedPowerPlant(selectedObject);
+          }}
+
+          hintStyle={{
+            color: "#3C4144"
+          }}
+
+          style={{
+            backgroundColor: "#fff",
+            color: "#3C4144",
+            paddingLeft: 10
           }}
           >
           {powerPlants.powerPlants.map((powerPlant)=>{
@@ -130,12 +141,14 @@ const ProducerSideBar = (props) => {
        </PieChart>
 
        <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {totalIssuedCertificate}</div>
-      <RaisedButton
-        label="PRODUCE"
-        fullWidth
-        backgroundColor="#FEC61A"
-        /*style={{height: 60}}*/
-      />
+
+
+      <button className="progress-button" data-style="fill" data-horizontal="">
+        <span className="content">Submit</span>
+        <span className="progress">
+          <span className="progress-inner" style={{width:"80%"}}></span>
+        </span>
+      </button>
 
 
       

@@ -183,6 +183,7 @@ export class  Login extends React.Component {
                         backgroundColor="#FEC61A"
                         label="Validate"
                         onClick={this.handleSubmit}
+                        className="bigBTN"
                         fullWidth
                       />
               </div>

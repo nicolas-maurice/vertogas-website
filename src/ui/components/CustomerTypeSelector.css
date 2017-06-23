@@ -3,11 +3,20 @@
     width: 62px !important;
 }
 
-.CustomerTypeSelector button > div > div {
+.customerTypeSelector button > div > div {
     height: inherit !important;
 }
 
-.CustomerTypeSelector button{
+.customerTypeSelector button{
+    height: inherit !important;
+    padding: 10px !important;
+}
+
+.bigBTN button > div > div {
+    height: inherit !important;
+}
+
+.bigBTN button{
     height: inherit !important;
     padding: 10px !important;
 }

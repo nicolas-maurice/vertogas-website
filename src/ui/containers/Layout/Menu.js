@@ -25,7 +25,7 @@ const Menu = ({items, open,owner,setOwner}) => {
         items.map(item => (
           <MenuItem 
             key={item.name}
-            className={item.type === owner.ownerType ? 'menu_item_selected':null}
+            className={item.type === owner.ownerType ? 'menu_item_selected':'menu_item'}
             primaryText={open ? item.name : null}
             leftIcon={open ? <item.icon /> : null}
             rightIcon={!open ? <item.icon /> : null}

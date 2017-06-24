@@ -9,4 +9,12 @@ body{
 
 .menu_item_selected svg{
     fill: #404040 !important; 
+    margin: 17px !important;
+    margin-left: 50px !important;
+}
+
+
+.menu_item svg{
+    margin: 17px !important;
+    margin-left: 50px !important;
 }

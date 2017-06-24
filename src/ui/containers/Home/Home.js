@@ -12,8 +12,9 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
-import {getPowerPlants,selectPowerPlant,getPowerPlantsTokens} from '../../../redux/actions';
+import {getPowerPlants,selectPowerPlant,getPowerPlantsTokens,addToken} from '../../../redux/actions';
 
 
 const producerBody = {
@@ -27,7 +28,9 @@ export class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      progress:80
+      progress:80,
+      snackbarOpen:false,
+      snackbarOpenMessage:''
     }
     this.renderCertificates = this.renderCertificates.bind(this);
   }
@@ -41,13 +44,17 @@ export class Home extends React.Component {
           if(this.progressTimer){
             clearInterval(this.progressTimer);
             this.progressTimer = null;
+            this.setState({
+              snackbarOpen:true,
+              snackbarOpenMessage:'You can produce your certificate'
+            })
           }
         }
         
-    },1000)
+    },750)
   }
   componentDidMount(){
-    this.props.getPowerPlants('0x0084313bb3d4326a50f6361aa193905b3f165359');
+    this.props.getPowerPlants(this.props.owner.address);
     this.setProgressTimer();
     
   }
@@ -74,7 +81,7 @@ export class Home extends React.Component {
                           <TableRow key={key}>
                             <TableRowColumn>{token.certifID}</TableRowColumn>
                             <TableRowColumn>{token.owner}</TableRowColumn>
-                            <TableRowColumn>{token.issuedDate}</TableRowColumn>
+                            <TableRowColumn>{token.issuedDate ? token.issuedDate : '11/12/2017'}</TableRowColumn>
                             <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
                           </TableRow>
                         )
@@ -85,6 +92,16 @@ export class Home extends React.Component {
       </div>
     )
   }
+  makeFakeId()
+    {
+        var text = "";
+        var possible = "0123456789abcdef";
+
+        for( var i=0; i < 64; i++ )
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return '0x'+text;
+    }
   render(){
     const {powerPlants,selectedPowerPlant,selectPowerPlant,getPowerPlantsTokens,tokens} = this.props;
     if(!selectedPowerPlant){
@@ -97,18 +114,28 @@ export class Home extends React.Component {
                              onChangeSelectedPowerPlant={(selectedP)=>{
                                selectPowerPlant(selectedP);
                              }}
-                             onProduce={()=>{
+                             onProduce={(powerPlant)=>{
                                this.setState({
-                                 progress:0
+                                 progress:0,
+                                 snackbarOpen:false,
+                                 snackbarOpenMessage:''
                                })
                                this.setProgressTimer();
+                               this.props.addToken(powerPlant,{
+                                    "certifID": this.makeFakeId(), 
+                                    "claimer": null, 
+                                    "id": 3, 
+                                    "isClaimed": false, 
+                                    "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
+                                    "owner": this.props.owner.address
+                                  })
                              }}
                              selectedPowerPlant={selectedPowerPlant}/>
             <div style={producerBody}>
               <div style={{margin:20}}>
                 <div className='key_holder'>
                     <div>
-                        <strong className='key_label'>KEY: </strong>SQDSQDSQDQSDQDQSDQSDQSD
+                        <strong className='key_label'>ETHEREUM ADDRESS: </strong>SQDSQDSQDQSDQDQSDQSDQSD
                     </div>
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>
@@ -116,10 +143,14 @@ export class Home extends React.Component {
                   this.renderCertificates()
                 }
               </div>
-
+               <Snackbar
+                      open={this.state.snackbarOpen}
+                      message={this.state.snackbarOpenMessage}
+                      autoHideDuration={3000}
+                    />
             </div>
-            
-          
+           
+                      
           </Paper>
         )
   }
@@ -144,7 +175,8 @@ const mapStateToProps = (state) => ({
 let actions = {
   getPowerPlants,
   selectPowerPlant,
-  getPowerPlantsTokens
+  getPowerPlantsTokens,
+  addToken
 }
 
 export default connect(

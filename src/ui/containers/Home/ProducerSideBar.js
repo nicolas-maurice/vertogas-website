@@ -139,7 +139,7 @@ const ProducerSideBar = (props) => {
 
        <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {selectedPowerPlant.tokens.length}</div>
    
-       <button className="progress-button" data-style="fill" data-horizontal="" onClick={onProduce} disabled={progress < 100 ? true:null}>
+       <button className="progress-button" data-style="fill" data-horizontal="" onClick={()=>onProduce(selectedPowerPlant)} disabled={progress < 100 ? true:null}>
           <span className="content">Produce</span>
           <span className="progress">
             <span className="progress-inner" style={{width:`${progress}%`}}></span>

@@ -4,6 +4,7 @@ import {
 import {
   POWER_PLANTS,
   FETCH_FAILURE,
+  ADD_TOKEN
 } from '../actions';
 /**
  * Reducers related to powerPlants handling
@@ -26,6 +27,16 @@ const powerPlantsReducer = (state = null, action) => {
       } else {
         return state;
       }
+    case ADD_TOKEN:
+    return state.map((pp)=>{
+        if(pp.id === action.payload.powerPlant.id){
+            return {
+                ...pp,
+                tokens:pp.tokens.concat([action.payload.token])
+            }
+        }
+        return pp;
+    });
     default:
       return state;
   }

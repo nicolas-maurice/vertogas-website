@@ -13,6 +13,7 @@ const TokenStatusButton = (props) => {
           labelStyle={{color:'#6EBF1D', textTransform: 'none'}}
           style={{height:28}}
           icon={<ActionDone style={{fill:"#6EBF1D", marginLeft:0}}/>}
+          disabled={true}
         />
       );
   }else{
@@ -21,7 +22,7 @@ const TokenStatusButton = (props) => {
             onClick={props.onClick}
             label="Claim it"
             backgroundColor='#6EBF1D'
-            labelColor='white'
+            labelColor='#FFF'
             labelStyle={{textTransform: 'none'}}
             style={{height:28}}
             buttonStyle={{lineHeight:'28px'}}

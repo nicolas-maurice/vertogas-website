@@ -46,11 +46,11 @@ export class Consumer extends React.Component{
                     <TableRow key={key}>
                         <TableRowColumn>{token.certifID}</TableRowColumn>
                         <TableRowColumn>{token.owner}</TableRowColumn>
-                        <TableRowColumn>{token.issuedDate}</TableRowColumn>
+                        <TableRowColumn>{token.issuedDate ? token.issuedDate : '11/12/2017'}</TableRowColumn>
                         <TableRowColumn><BarChart Wood="40%" Grass="30%" Corn="30%" /></TableRowColumn>
                         <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
                     </TableRow>
-                )
+                )     
             })
         )
     }
@@ -62,7 +62,7 @@ export class Consumer extends React.Component{
             <div style={{height:'100%', backgroundColor: "#f4f4f4", padding:20}}>
                 <div className='key_holder'>
                     <div>
-                        <strong className='key_label'>KEY: </strong>SQDSQDSQDQSDQDQSDQSDQSD
+                        <strong className='key_label'>ETHEREUM ADDRESS: </strong>SQDSQDSQDQSDQDQSDQSDQSD
                     </div>
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>

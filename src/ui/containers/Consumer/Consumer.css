@@ -52,6 +52,7 @@
 }
 .search_filed{
     margin: 10px 24px !important;
+    padding: 8px !important;
     background: #FFFFFF;
     border: 1px solid #979797 !important;
     height: 33px !important;

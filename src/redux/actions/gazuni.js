@@ -49,6 +49,19 @@ export const getOwnerTokens = (owner) => ({
   },
 })
 
+
+
+/* For getting adding token */
+export const ADD_TOKEN = 'ADD_TOKEN';
+
+/**
+ * add token action creator 
+ */
+export const addToken = (powerPlant,token) => ({
+  type: ADD_TOKEN,
+  payload:{token,powerPlant}
+})
+
 /* For getting owner tokens */
 export const ALL_TOKENS = 'ALL_TOKENS';
 export const ALL_TOKENS_REQUEST = 'ALL_TOKENS_REQUEST';

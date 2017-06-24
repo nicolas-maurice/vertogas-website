@@ -4,7 +4,8 @@ import {
   TOGGLE_USER_BOX,
   SET_USER_BOX_VISIBILITY,
   SELECT_POWER_PLANT,
-  POWER_PLANTS_SUCCESS
+  POWER_PLANTS_SUCCESS,
+  ADD_TOKEN
 } from '../actions';
 
 const initialState = {
@@ -52,7 +53,14 @@ export default (state = initialState, { type, payload }) => {
         }
       }
       return state;
-      
+    case ADD_TOKEN:
+    return {
+      ...state,
+      selectedPowerPlant:{
+        ...state.selectedPowerPlant,
+        tokens:state.selectedPowerPlant.tokens.concat([payload.token])
+      }
+    }
 
     default:
       return state;

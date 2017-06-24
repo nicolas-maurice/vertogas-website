@@ -4,7 +4,7 @@ import {
 import {OWNER_TYPES} from '../../common'
 let initialState ={
   ownerType:OWNER_TYPES.PRODUCER,
-  address:'0x13377b14b615fff59c8e66288c32365d38181cdb'
+  address:'0x0084313bb3d4326a50f6361aa193905b3f165359'
 }
 /**
  * Reducers related to owner handling

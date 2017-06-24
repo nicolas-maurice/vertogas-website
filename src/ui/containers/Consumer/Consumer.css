@@ -66,3 +66,9 @@
     color: #FFB946 !important;
     text-transform: uppercase !important;
 }
+
+.hilight_text{
+    color: #FFB946 !important;
+    background-color: transparent !important;
+    font-size: 15px !important;
+}

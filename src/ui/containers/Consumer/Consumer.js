@@ -17,6 +17,7 @@ import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton'
 import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import BarChart from '../../components/BarChart'
+import Highlighter from 'react-highlight-words'
 import './Consumer.css'
 
 
@@ -25,7 +26,8 @@ export class Consumer extends React.Component{
     constructor(props){
         super(props)
         this.state={
-            allToken:true
+            allToken:true,
+            textFilter:''
         }
     }
     componentDidMount(){
@@ -40,12 +42,25 @@ export class Consumer extends React.Component{
         if(!data){
             return null;
         }
+        data = data.filter((value)=>value.certifID.includes(this.state.textFilter) || value.owner.includes(this.state.textFilter))
         return (
             data.map((token,key)=>{
                 return (
                     <TableRow key={key}>
-                        <TableRowColumn>{token.certifID}</TableRowColumn>
-                        <TableRowColumn>{token.owner}</TableRowColumn>
+                        <TableRowColumn>
+                            <Highlighter
+                                        highlightClassName='hilight_text'
+                                        searchWords={[this.state.textFilter]}
+                                        textToHighlight={token.certifID}
+                                        />
+                        </TableRowColumn>
+                        <TableRowColumn>
+                            <Highlighter
+                                        highlightClassName='hilight_text'
+                                        searchWords={[this.state.textFilter]}
+                                        textToHighlight={token.owner}
+                                        />
+                        </TableRowColumn>
                         <TableRowColumn>{token.issuedDate ? token.issuedDate : '11/12/2017'}</TableRowColumn>
                         <TableRowColumn><BarChart Wood="40%" Grass="30%" Corn="30%" /></TableRowColumn>
                         <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
@@ -74,7 +89,11 @@ export class Consumer extends React.Component{
                 </Toolbar>
                 <div className='table_holder'>
                     <div className='table_toolbar'>
-                        <TextField hintText="Search" className='search_filed' underlineShow={false}/>
+                        <TextField hintText="Search" className='search_filed' underlineShow={false} onChange={(e,text)=>{
+                                this.setState({
+                                    textFilter:text
+                                })
+                            }}/>
                         <RadioButtonGroup name="shipSpeed" defaultSelected="corn" style={{ display: 'flex' }} className='radio_group'>
                             <RadioButton
                                 value="corn"

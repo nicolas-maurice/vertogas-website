@@ -73,7 +73,8 @@ export class  Login extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      showSelectCustomerTypeView:true
+      showSelectCustomerTypeView:true,
+      blockChain:"0x0084313bb3d4326a50f6361aa193905b3f165359"
     }
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -164,7 +165,7 @@ export class  Login extends React.Component {
                           type="text"
                           hintText="BLOCKCHAIN KEY NUMBER"
                           underlineShow={false}
-
+                          value={this.state.blockChain}
                           style={{
                             background: "#FFFFFF",
                             fontSize: 16,

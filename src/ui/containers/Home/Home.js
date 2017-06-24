@@ -26,10 +26,30 @@ const producerBody = {
 export class Home extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+      progress:80
+    }
     this.renderCertificates = this.renderCertificates.bind(this);
+  }
+  setProgressTimer(){
+  this.progressTimer =   setInterval(()=>{
+        if(this.state.progress < 100){
+          this.setState({
+              progress: this.state.progress + 1
+          })
+        }else{
+          if(this.progressTimer){
+            clearInterval(this.progressTimer);
+            this.progressTimer = null;
+          }
+        }
+        
+    },1000)
   }
   componentDidMount(){
     this.props.getPowerPlants('0x0084313bb3d4326a50f6361aa193905b3f165359');
+    this.setProgressTimer();
+    
   }
   renderCertificates(){
     if(!this.props.selectedPowerPlant.tokens){
@@ -73,9 +93,15 @@ export class Home extends React.Component {
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
             <ProducerSideBar powerPlants={powerPlants}
-                             totalIssuedCertificate={tokens.tokens ? tokens.tokens.length : 0}
+                             progress = {this.state.progress}
                              onChangeSelectedPowerPlant={(selectedP)=>{
                                selectPowerPlant(selectedP);
+                             }}
+                             onProduce={()=>{
+                               this.setState({
+                                 progress:0
+                               })
+                               this.setProgressTimer();
                              }}
                              selectedPowerPlant={selectedPowerPlant}/>
             <div style={producerBody}>
@@ -96,6 +122,14 @@ export class Home extends React.Component {
           
           </Paper>
         )
+  }
+
+
+  componentWillUnmount(){
+    if(this.progressTimer){
+      clearInterval(this.progressTimer)
+      this.progressTimer = null;
+    }
   }
  
 };

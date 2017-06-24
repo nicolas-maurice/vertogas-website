@@ -4,7 +4,6 @@ import Paper from 'material-ui/Paper';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import generateColor from '../../../common/utils.js';
 
 import {PieChart, Pie, Sector, Cell} from 'recharts';
@@ -63,14 +62,12 @@ const renderActiveShape = (props) => {
 
 
 const ProducerSideBar = (props) => {
-  const {powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant, totalIssuedCertificate} = props;
+  const {powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant,progress,onProduce} = props;
   let data = selectedPowerPlant.mix.map((m)=>{
     return {name:m.biomass.name,value:m.ratio}
   })
 
   let tagColors = generateColor("#FEC61A","#9E7700",selectedPowerPlant.mix.length);
-
-  console.log(tagColors)
   return (
     <Paper style={styles.sidebarProducer} zDepth={3} className="producerSideBar">
       <SelectField
@@ -140,17 +137,14 @@ const ProducerSideBar = (props) => {
           </Pie>
        </PieChart>
 
-       <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {totalIssuedCertificate}</div>
-
-
-      <button className="progress-button" data-style="fill" data-horizontal="">
-        <span className="content">Submit</span>
-        <span className="progress">
-          <span className="progress-inner" style={{width:"80%"}}></span>
-        </span>
-      </button>
-
-
+       <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {selectedPowerPlant.tokens.length}</div>
+   
+       <button className="progress-button" data-style="fill" data-horizontal="" onClick={onProduce} disabled={progress < 100 ? true:null}>
+          <span className="content">Produce</span>
+          <span className="progress">
+            <span className="progress-inner" style={{width:`${progress}%`}}></span>
+          </span>
+        </button>
       
     </Paper>
   );

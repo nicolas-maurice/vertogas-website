@@ -45,7 +45,7 @@ class TokenStatusButton extends React.Component {
                     self.claimCertificate()
                 }, 3000);
               }}
-              label={pending?"":"Claim it"}
+              label={pending?"Pending":"Claim it"}
               backgroundColor={pending?'rgba(110, 191, 29, 0.48)':'#6EBF1D'}
               labelColor='#FFF'
               labelStyle={{textTransform: 'none'}}
@@ -54,13 +54,13 @@ class TokenStatusButton extends React.Component {
             >
              {pending ? (
                <CircularProgress 
-                size={24} 
+                size={20} 
                 thickness={3} 
                 color="#FFF"
                 style={{
-                    position: "absolute",
-                    left: "35%",
-                    top: "2px"
+                    position: "relative",
+                    left: "3px",
+                    top: "3px"
                 }}
               />
              ): null}

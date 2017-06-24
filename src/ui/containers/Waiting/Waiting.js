@@ -5,45 +5,18 @@ import React, {
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
 import CircularProgress from 'material-ui/CircularProgress';
+import './Waiting.css';
 
-import defaultTheme from '../defaultTheme';
-
-const styles = {
-  body: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-};
-
-const prefixedStyles = {};
 
 const Waiting = (props) => {
-  const { 
-    theme 
-  } = props;
-  const muiTheme = getMuiTheme(theme);
-  
-  if (!prefixedStyles.main) {
-    const prefix = autoprefixer(muiTheme);
-    prefixedStyles.body = prefix(styles.body);
-  }
 
   return (
-    <div style={prefixedStyles.body}>
-      <CircularProgress size={50} thickness={5} />
+    <div className="loadingContent">
+        <div className="loadingBody">
+            <CircularProgress size={80} thickness={5} color="#FEC61A"/>
+        </div>
     </div>
   );
-}
-
-Waiting.propTypes = {
-  theme: PropTypes.object.isRequired,
-}
-
-Waiting.defaultProps = {
-  theme: defaultTheme,
 }
 
 export default Waiting;

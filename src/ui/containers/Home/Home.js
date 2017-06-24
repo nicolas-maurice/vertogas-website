@@ -15,6 +15,7 @@ import {
 import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import {getPowerPlants,selectPowerPlant,addToken} from '../../../redux/actions';
+import Waiting from '../Waiting/Waiting'
 
 
 const producerBody = {
@@ -60,7 +61,7 @@ export class Home extends React.Component {
   }
   renderCertificates(){
     if(!this.props.selectedPowerPlant.tokens){
-      return <div>Loading</div>
+      return  <Waiting />
     }
     return (
       <div className='table_holder'>
@@ -105,7 +106,7 @@ export class Home extends React.Component {
   render(){
     const {powerPlants,selectedPowerPlant,selectPowerPlant} = this.props;
     if(!selectedPowerPlant){
-      return <div> loading</div>
+      return  <Waiting />
     }
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>

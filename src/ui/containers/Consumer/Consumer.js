@@ -18,6 +18,7 @@ import {Toolbar, ToolbarGroup} from 'material-ui/Toolbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import BarChart from '../../components/BarChart'
 import Highlighter from 'react-highlight-words'
+import Waiting from '../Waiting/Waiting'
 import './Consumer.css'
 
 
@@ -71,7 +72,9 @@ export class Consumer extends React.Component{
     }
     render(){
         if(!this.props.tokens.all.tokens){
-            return <div>Loading</div>
+            return (
+                <Waiting />
+            )
         }
         return (
             <div style={{height:'100%', backgroundColor: "#f4f4f4", padding:20}}>

@@ -3,7 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
 const TokenStatusButton = (props) => {
-  let component = props.claimed ? RaisedButton : FlatButton
+ 
 
   if(props.claimed){
     return (

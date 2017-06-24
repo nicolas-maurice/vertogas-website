@@ -3,7 +3,6 @@ import Paper from 'material-ui/Paper';
 
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 import generateColor from '../../../common/utils.js';
 
 import {PieChart, Pie, Sector, Cell} from 'recharts';
@@ -25,8 +24,6 @@ const styles = {
     height: "100%"
   }
 };
-
-const COLORS = ['#FEC61A', '#CD9B00', '#9E7700'];
 
 
 const renderActiveShape = (props) => {

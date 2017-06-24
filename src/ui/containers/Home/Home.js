@@ -14,7 +14,7 @@ import {
 } from 'material-ui/Table';
 import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
-import {getPowerPlants,selectPowerPlant,getPowerPlantsTokens,addToken} from '../../../redux/actions';
+import {getPowerPlants,selectPowerPlant,addToken} from '../../../redux/actions';
 
 
 const producerBody = {
@@ -103,14 +103,14 @@ export class Home extends React.Component {
         return '0x'+text;
     }
   render(){
-    const {powerPlants,selectedPowerPlant,selectPowerPlant,getPowerPlantsTokens,tokens} = this.props;
+    const {powerPlants,selectedPowerPlant,selectPowerPlant} = this.props;
     if(!selectedPowerPlant){
       return <div> loading</div>
     }
      return (
           <Paper zDepth={3} style={{height:"100%",backgroundColor:"transparent"}}>
             <ProducerSideBar powerPlants={powerPlants}
-                             progress = {this.state.progress}
+                             progress={this.state.progress}
                              onChangeSelectedPowerPlant={(selectedP)=>{
                                selectPowerPlant(selectedP);
                              }}
@@ -166,7 +166,6 @@ export class Home extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-  tokens: state.tokens.powerPlantsTokens,
   powerPlants: state.powerPlants,
   owner: state.owner,
   selectedPowerPlant: state.ui.selectedPowerPlant
@@ -175,7 +174,6 @@ const mapStateToProps = (state) => ({
 let actions = {
   getPowerPlants,
   selectPowerPlant,
-  getPowerPlantsTokens,
   addToken
 }
 

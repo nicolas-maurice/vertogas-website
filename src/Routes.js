@@ -4,7 +4,6 @@ import {
   Route,
 } from 'react-router';
 
-import VisibilityOffIcon from 'material-ui/svg-icons/action/visibility-off';
 import {OWNER_TYPES} from './common'
 import Wrapper from './ui/containers/Wrapper/Wrapper';
 import Login from './ui/containers/Login/Login';

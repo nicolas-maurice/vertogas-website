@@ -29,7 +29,7 @@ import TextInput from '../../components/TextInput';
 import CustomerTypeSelector from '../../components/CustomerTypeSelector';
 
 
-import background from '../../../../public/img/background.png'
+import background from '../../img/background.png'
 import './Login.css';
 const styles = {
   body: {

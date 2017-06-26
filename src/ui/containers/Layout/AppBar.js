@@ -4,7 +4,7 @@ import React, {
 
 import './AppBar.css';
 
-import Logo from '../../../../public/img/logo.png';
+import Logo from '../../img/logo.png';
 
 
 const AppBar = (props) => {

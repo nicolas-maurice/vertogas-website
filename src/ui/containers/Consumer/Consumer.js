@@ -22,7 +22,6 @@ import Waiting from '../Waiting/Waiting'
 import './Consumer.css'
 
 
-
 export class Consumer extends React.Component{
     constructor(props){
         super(props)

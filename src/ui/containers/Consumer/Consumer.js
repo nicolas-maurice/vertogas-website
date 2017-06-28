@@ -20,8 +20,8 @@ import BarChart from '../../components/BarChart'
 import Highlighter from 'react-highlight-words'
 import Waiting from '../Waiting/Waiting'
 import './Consumer.css'
-
-
+import checked from './icon_check_selected.svg'
+import unchecked from './icon_unchecked.svg'
 
 export class Consumer extends React.Component{
     constructor(props){
@@ -102,18 +102,24 @@ export class Consumer extends React.Component{
                                 value="corn"
                                 label="Corn"
                                 labelPosition="left"
+                                uncheckedIcon={<img src={unchecked} alt="Corn uncheck"/>}
+                                checkedIcon={<img src={checked} alt="Corn check"/>}
                                 className='radio_button'
                             />
                             <RadioButton
                                 value="wood"
                                 label="Wood"
                                 labelPosition="left"
+                                uncheckedIcon={<img src={unchecked} alt="Wood uncheck"/>}
+                                checkedIcon={<img src={checked} alt="Wood check"/>}
                                 className='radio_button'
                             />
                             <RadioButton
                                 value="grass"
                                 label="Grass"
                                 labelPosition="left"
+                                uncheckedIcon={<img src={unchecked} alt="Grass uncheck"/>}
+                                checkedIcon={<img src={checked} alt="Grass check"/>}
                                 className='radio_button'
                             />
                         </RadioButtonGroup>

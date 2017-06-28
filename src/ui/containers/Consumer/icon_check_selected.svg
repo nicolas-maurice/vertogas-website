@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 44.1 (41455) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_check_selected</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="4" transform="translate(-1145.000000, -209.000000)">
+            <g id="Group-4" transform="translate(1096.000000, 206.000000)">
+                <g id="icon_check_selected" transform="translate(50.000000, 4.000000)">
+                    <circle id="Oval" stroke="#979797" fill="#4D4D4D" cx="6" cy="6" r="6"></circle>
+                    <circle id="Oval-Copy-2" fill="#FEC61A" cx="6" cy="6" r="3"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

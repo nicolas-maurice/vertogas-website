@@ -67,18 +67,18 @@ export class Home extends React.Component {
     return (
       <div className='table_holder' style={{marginBottom:20}}>
           <h4>{selectedPowerPlant.name} Composition details :</h4>
-          <Table selectable={false}>
-              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                  <TableRow>
-                      <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
-                      <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
-                      <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
-                      <TableHeaderColumn className='table_header'>Issued certificates</TableHeaderColumn>
-                      <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
-                      <TableHeaderColumn className='table_header'></TableHeaderColumn>
-                  </TableRow>
-              </TableHeader>
-              <TableBody displayRowCheckbox={false}>
+          <div selectable={false}>
+              <div displaySelectAll={false} adjustForCheckbox={false}>
+                  <div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}>Gaz sources</div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}>Split</div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}>Production Rolling Year</div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}>Issued certificates</div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}>Rest</div>
+                      <div className='table_header' style={{float:'left',width:100/6+'%'}}></div>
+                  </div>
+              </div>
+              <div displayRowCheckbox={false}>
                   {
                     selectedPowerPlant.mix.map((compo,key)=>{
                       return (
@@ -86,8 +86,17 @@ export class Home extends React.Component {
                       )
                     })
                   }
-              </TableBody>
-          </Table>
+                  <div style={{clear:'both', marginBottom:30}}>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>TOTAL</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>-</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>100</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>3</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>1</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}></div>
+                  </div>
+              </div>
+          </div>
+
       </div>
     )
   }

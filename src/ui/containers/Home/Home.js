@@ -86,16 +86,17 @@ export class Home extends React.Component {
                       )
                     })
                   }
-                  <div style={{clear:'both'}}>
-                      <div style={{float:'left',width:100/6+'%'}}>TOTAL</div>
-                      <div style={{float:'left',width:100/6+'%'}}>-</div>
-                      <div style={{float:'left',width:100/6+'%'}}>100</div>
-                      <div style={{float:'left',width:100/6+'%'}}>3</div>
-                      <div style={{float:'left',width:100/6+'%'}}>1</div>
-                      <div style={{float:'left',width:100/6+'%'}}></div>
+                  <div style={{clear:'both', marginBottom:30}}>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>TOTAL</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>-</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>100</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>3</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>1</div>
+                      <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}></div>
                   </div>
               </div>
           </div>
+
       </div>
     )
   }

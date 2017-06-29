@@ -17,6 +17,7 @@ import TokenStatusButton from '../../components/TokenStatusButton'
 import {getPowerPlants,selectPowerPlant,addToken} from '../../../redux/actions';
 import Waiting from '../Waiting/Waiting'
 
+import vertogas from '../../../web3'
 
 const producerBody = {
   float:'left', 
@@ -34,6 +35,8 @@ export class Home extends React.Component {
       snackbarOpenMessage:''
     }
     this.renderCertificates = this.renderCertificates.bind(this);
+    this.onProduce = this.onProduce.bind(this);
+    this.onProduceCb = this.onProduceCb.bind(this);
   }
   setProgressTimer(){
   this.progressTimer =   setInterval(()=>{
@@ -83,7 +86,7 @@ export class Home extends React.Component {
                             <TableRowColumn>{token.certifID}</TableRowColumn>
                             <TableRowColumn>{token.owner}</TableRowColumn>
                             <TableRowColumn>{token.issuedDate ? token.issuedDate : '11/12/2017'}</TableRowColumn>
-                            <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                            <TableRowColumn><TokenStatusButton claimed={token.isClaimed} certifID={token.certifID}/></TableRowColumn>
                           </TableRow>
                         )
                       })
@@ -103,6 +106,32 @@ export class Home extends React.Component {
 
         return '0x'+text;
     }
+
+  onProduceCb(powerPlant, {certifID, metaData,  owner, timestamp}) {
+    // this.setState({
+    //   progress:0,
+    //   snackbarOpen:false,
+    //   snackbarOpenMessage:''
+    // })
+    // this.setProgressTimer();
+    this.props.addToken(powerPlant, {
+        certifID, 
+        claimer: null, 
+        isClaimed: false, 
+        metaData, 
+        owner,
+        issuedDate: timestamp,
+    })
+  }
+
+  onProduce(powerPlant) {
+    vertogas().newCertificate(
+      powerPlant.metaData,
+      powerPlant.owner,
+      (token) => this.onProduceCb(powerPlant, token)
+    )
+  }
+
   render(){
     const {powerPlants,selectedPowerPlant,selectPowerPlant} = this.props;
     if(!selectedPowerPlant){
@@ -115,21 +144,8 @@ export class Home extends React.Component {
                              onChangeSelectedPowerPlant={(selectedP)=>{
                                selectPowerPlant(selectedP);
                              }}
-                             onProduce={(powerPlant)=>{
-                               this.setState({
-                                 progress:0,
-                                 snackbarOpen:false,
-                                 snackbarOpenMessage:''
-                               })
-                               this.setProgressTimer();
-                               this.props.addToken(powerPlant,{
-                                    "certifID": this.makeFakeId(), 
-                                    "claimer": null, 
-                                    "id": 3, 
-                                    "isClaimed": false, 
-                                    "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000", 
-                                    "owner": this.props.owner.address
-                                  })
+                             onProduce={(powerPlant) => {
+                                this.onProduce(powerPlant)
                              }}
                              selectedPowerPlant={selectedPowerPlant}/>
             <div style={producerBody}>

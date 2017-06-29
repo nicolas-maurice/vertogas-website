@@ -18,7 +18,8 @@
     "recharts": "^1.0.0-alpha.1",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
-    "redux-saga": "^0.14.3"
+    "redux-saga": "^0.14.3",
+    "web3": "^0.19.1"
   },
   "scripts": {
     "start": "react-scripts start",

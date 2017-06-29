@@ -1,0 +1,316 @@
+{
+  "contract_name": "VertogasRegistrar",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "destruct",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_certifID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getCertificateOwner",
+      "outputs": [
+        {
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_certifID",
+          "type": "bytes32"
+        },
+        {
+          "name": "_to",
+          "type": "address"
+        }
+      ],
+      "name": "transfer",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_metaData",
+          "type": "bytes32"
+        },
+        {
+          "name": "_owner",
+          "type": "address"
+        }
+      ],
+      "name": "newCertificate",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_admin",
+          "type": "address"
+        }
+      ],
+      "name": "changeAdmin",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_certifID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "claim",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_certifID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "adminCleaning",
+      "outputs": [],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_certifID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getCertificateTimelimit",
+      "outputs": [
+        {
+          "name": "timeLimit",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "emittedCertificateCount",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint40"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "admin",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "metaData",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "certifID",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "name": "owner",
+          "type": "address"
+        }
+      ],
+      "name": "NewCertificate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "certifID",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "name": "to",
+          "type": "address"
+        }
+      ],
+      "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "certifID",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "name": "from",
+          "type": "address"
+        }
+      ],
+      "name": "Claim",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "name": "certifID",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AdminCleaning",
+      "type": "event"
+    }
+  ],
+  "unlinked_binary": "0x6060604052341561000c57fe5b5b60018054602860020a60c860020a0319166501000000000033600160a060020a0316021790555b5b610640806100446000396000f300606060405236156100885763ffffffff60e060020a6000350416632b68b9c6811461008a5780633daa98ef1461009c57806379ce9fac146100cb578063896a3fbd146100ec5780638f2839701461011d578063bd66528a1461013b578063c259254814610150578063cd092ae214610165578063e14215bb1461018a578063f851a440146101b4575bfe5b341561009257fe5b61009a6101e0565b005b34156100a457fe5b6100af60043561021b565b60408051600160a060020a039092168252519081900360200190f35b34156100d357fe5b61009a600435600160a060020a0360243516610239565b005b34156100f457fe5b61010b600435600160a060020a0360243516610313565b60408051918252519081900360200190f35b341561012557fe5b61009a600160a060020a03600435166103f3565b005b341561014357fe5b61009a60043561043f565b005b341561015857fe5b61009a600435610534565b005b341561016d57fe5b61010b6004356105d9565b60408051918252519081900360200190f35b341561019257fe5b61019a6105f1565b6040805164ffffffffff9092168252519081900360200190f35b34156101bc57fe5b6100af6105fe565b60408051600160a060020a039092168252519081900360200190f35b60015433600160a060020a03908116602860020a90920416146102035760006000fd5b600154602860020a9004600160a060020a0316ff5b5b565b600081815260208190526040902054600160a060020a03165b919050565b600082815260208190526040902054829033600160a060020a039081169116148015610275575060008181526020819052604090206001015442105b15156102815760006000fd5b6000838152602081905260409020548390600160a060020a031615156102a75760006000fd5b600084815260208181526040918290208054600160a060020a031916600160a060020a0387811691821790925583518881529351909333909216927f57972c0bcb114a9f52d3501767c95a65e93901ff48da6677c7399b5593b4e999928290030190a35b5b505b505050565b6001805464ffffffffff19811664ffffffffff9182168301821617808355604080518681529190921660d860020a0260208083019190915282516025928190039290920182208284018452600160a060020a03868116808552426301e1338001858501908152600084815280865287812096518754600160a060020a031916941693909317865551949096019390935583518781529182018190528184019490945291519092917f111b55d19636f8bf5e2d7ebc8191abaf9678d7a1c8d9fc4fba746e2c95c00836916060918190039190910190a18091505b5092915050565b60015433600160a060020a03908116602860020a90920416146104165760006000fd5b60018054602860020a60c860020a031916602860020a600160a060020a038416021790555b5b50565b600081815260208190526040902054819033600160a060020a03908116911614801561047b575060008181526020819052604090206001015442105b15156104875760006000fd5b6000828152602081905260409020548290600160a060020a031615156104ad5760006000fd5b6000838152602081815260408083208054600160a060020a0319168155600190810193909355825464ffffffffff808216600019011664ffffffffff19909116179092558151858152915133600160a060020a0316927f15d625b4b35864ffb5bdbb3fc4b62ceb07b3c588af6945a1934ccb822a23975592908290030190a25b5b505b5050565b60015433600160a060020a03908116602860020a90920416146105575760006000fd5b6000818152602081905260409020548190600160a060020a0316151561057d5760006000fd5b6000828152602081815260408083208054600160a060020a031916815560010192909255815184815291517fe203a4555521bd9cbcc1a845fab8d8fa8fc15e06f4f5769c6d0cb6ac7a99b1ef9281900390910190a15b5b505b50565b6000818152602081905260409020600101545b919050565b60015464ffffffffff1681565b600154602860020a9004600160a060020a0316815600a165627a7a72305820f9476343ceef48209f228289b5bf5b7a07846c72bf26ec91e693701ff1f6bbe30029",
+  "networks": {
+    "1498333624324": {
+      "events": {
+        "0x111b55d19636f8bf5e2d7ebc8191abaf9678d7a1c8d9fc4fba746e2c95c00836": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "metaData",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "certifID",
+              "type": "bytes32"
+            },
+            {
+              "indexed": false,
+              "name": "owner",
+              "type": "address"
+            }
+          ],
+          "name": "NewCertificate",
+          "type": "event"
+        },
+        "0x57972c0bcb114a9f52d3501767c95a65e93901ff48da6677c7399b5593b4e999": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "certifID",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "name": "to",
+              "type": "address"
+            }
+          ],
+          "name": "Transfer",
+          "type": "event"
+        },
+        "0x15d625b4b35864ffb5bdbb3fc4b62ceb07b3c588af6945a1934ccb822a239755": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "certifID",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "name": "from",
+              "type": "address"
+            }
+          ],
+          "name": "Claim",
+          "type": "event"
+        },
+        "0xe203a4555521bd9cbcc1a845fab8d8fa8fc15e06f4f5769c6d0cb6ac7a99b1ef": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "name": "certifID",
+              "type": "bytes32"
+            }
+          ],
+          "name": "AdminCleaning",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0x60fd57637b38a8b70a71716c16cf79f22294ca29",
+      "updated_at": 1498333712308
+    }
+  },
+  "schema_version": "0.0.5",
+  "updated_at": 1498333712308
+}

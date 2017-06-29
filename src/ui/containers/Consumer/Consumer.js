@@ -30,11 +30,11 @@ export class Consumer extends React.Component{
             textFilter:''
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.getAlltoken()
         this.props.getOwnerTokens(this.props.owner.address)
     }
-    renderTokens(){
+    renderTokens() {
         let data = this.props.tokens.ownerTokens.tokens;
         if(this.state.allToken){
             data = this.props.tokens.all.tokens;
@@ -63,13 +63,13 @@ export class Consumer extends React.Component{
                         </TableRowColumn>
                         <TableRowColumn>{token.issuedDate ? token.issuedDate : '11/12/2017'}</TableRowColumn>
                         <TableRowColumn><BarChart Wood="40%" Grass="30%" Corn="30%" /></TableRowColumn>
-                        <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                        <TableRowColumn><TokenStatusButton claimed={token.isClaimed} certifID={token.certifID}/></TableRowColumn>
                     </TableRow>
                 )     
             })
         )
     }
-    render(){
+    render() {
         if(!this.props.tokens.all.tokens){
             return (
                 <Waiting />

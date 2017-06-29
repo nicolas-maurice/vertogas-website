@@ -74,7 +74,7 @@ export class  Login extends React.Component {
     super(props);
     this.state = {
       showSelectCustomerTypeView:true,
-      blockChain:"0x0084313bb3d4326a50f6361aa193905b3f165359"
+      blockChain:"0xfa8edc618a3eb4804131db12272c9ad6c1dd7b32"
     }
     this.handleSubmit = this.handleSubmit.bind(this);
 

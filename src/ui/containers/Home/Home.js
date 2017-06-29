@@ -3,6 +3,7 @@ import {
   connect
 } from 'react-redux';
 import Paper from 'material-ui/Paper'
+import {Card, CardHeader, CardText} from 'material-ui/Card';
 import ProducerSideBar from './ProducerSideBar'
 import {
   Table,
@@ -14,6 +15,8 @@ import {
 } from 'material-ui/Table';
 import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
+import PorduceBiomassButton from '../../components/PorduceBiomassButton'
+import BiomassRow from '../../components/BiomassRow'
 import {getPowerPlants,selectPowerPlant,addToken} from '../../../redux/actions';
 import Waiting from '../Waiting/Waiting'
 
@@ -58,6 +61,42 @@ export class Home extends React.Component {
     this.props.getPowerPlants(this.props.owner.address);
     this.setProgressTimer();
     
+  }
+  renderPowerPlantDetails(){
+    let {selectedPowerPlant} = this.props;
+    return (
+      <div className='table_holder' style={{marginBottom:20}}>
+          <h4>{selectedPowerPlant.name} Composition details :</h4>
+          <Table selectable={false}>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                  <TableRow>
+                      <TableHeaderColumn className='table_header'>Gaz sources</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>Split</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>Production Rolling Year</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>Issued certificates</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'>Rest</TableHeaderColumn>
+                      <TableHeaderColumn className='table_header'></TableHeaderColumn>
+                  </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false}>
+                  {
+                    selectedPowerPlant.mix.map((compo,key)=>{
+                      return (
+                        <BiomassRow compo={compo} key={key}/>
+                      )
+                    })
+                  }
+                  <TableRow>
+                      <TableRowColumn>TOTAL</TableRowColumn>
+                      <TableRowColumn>-</TableRowColumn>
+                      <TableRowColumn>100</TableRowColumn>
+                      <TableRowColumn>3</TableRowColumn>
+                      <TableRowColumn>1</TableRowColumn>
+                  </TableRow>
+              </TableBody>
+          </Table>
+      </div>
+    )
   }
   renderCertificates(){
     if(!this.props.selectedPowerPlant.tokens){
@@ -140,6 +179,7 @@ export class Home extends React.Component {
                     </div>
                     <a href="#" className='change_key' onClick={(e)=>{e.preventDefault()}}>CHANGER</a>
                 </div>
+                {this.renderPowerPlantDetails()}
                 {
                   this.renderCertificates()
                 }

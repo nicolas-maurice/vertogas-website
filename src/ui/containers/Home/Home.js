@@ -86,13 +86,6 @@ export class Home extends React.Component {
                       )
                     })
                   }
-                  <TableRow>
-                      <TableRowColumn>TOTAL</TableRowColumn>
-                      <TableRowColumn>-</TableRowColumn>
-                      <TableRowColumn>100</TableRowColumn>
-                      <TableRowColumn>3</TableRowColumn>
-                      <TableRowColumn>1</TableRowColumn>
-                  </TableRow>
               </TableBody>
           </Table>
       </div>

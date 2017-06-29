@@ -19,6 +19,7 @@ class PorduceBiomassButton extends React.Component {
 
   render(){
     const {pending} = this.state;
+    let {disabled} = this.props;
       return (
         <RaisedButton
               onClick={() => {
@@ -31,10 +32,11 @@ class PorduceBiomassButton extends React.Component {
                 });
                 setTimeout(function(){ 
                     self.produceBioMass()
-                }, 3000);
+                }, (Math.random() * 7000 + 3000));
               }}
               label={pending?"Producing":"Produce"}
               backgroundColor={pending?'rgba(254, 198, 26, 0.48)':'#FEC61A'}
+              disabled={disabled}
               labelColor='#000'
               labelStyle={{textTransform: 'none'}}
               style={{height:28}}

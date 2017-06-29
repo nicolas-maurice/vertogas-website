@@ -10,7 +10,9 @@ class BiomassRow extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-        expanded:false
+        expanded:false,
+        amount:0,
+        issued:0
      };
   }
   renderDetailsRow(){
@@ -25,7 +27,7 @@ class BiomassRow extends React.Component {
           )
       }
   }
-
+  
   render() {
       let {compo,...otherProps} = this.props;
     return (
@@ -42,26 +44,47 @@ class BiomassRow extends React.Component {
                         </CardText>
                     </Card>
                 </TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio * 10 / 100}</TableRowColumn>
+                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{Math.abs(this.state.amount.toFixed(1))}</TableRowColumn>
                 <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
+                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{this.state.issued}</TableRowColumn>
                 <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}><PorduceBiomassButton onClick={()=>{
-                      let self = this;
-                      this.setState({
-                          expanded:true
-                      });
-                      {/*setTimeout(()=>{
-                          self.setState({expanded:false})
-                      },3000)*/}
-                    }}/></TableRowColumn>
+                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>
+                    <PorduceBiomassButton disabled={this.state.amount.toFixed(1) < 1} 
+                            onClick={()=>{
+                                let self = this;
+                                this.setState({
+                                    expanded:true,
+                                    amount:this.state.amount - 1
+                                });
+                                setTimeout(()=>{
+                                    self.setState({expanded:false,issued:this.state.issued + 1})
+                                },3000)
+                            }}
+                    />
+                </TableRowColumn>
             </TableRow>
          
     );
   }
 
   componentDidMount() {
-    this.setState({ someKey: 'otherValue' });
+   if(this.timer){
+       clearInterval(this.timer);
+       this.timer = null;
+   }
+   
+   this.timer = setInterval(()=>{
+       this.setState({
+           amount:this.state.amount + 0.1
+       })
+   },(Math.random() * 7000 + 3000))
+  }
+
+  componentWillUnmount(){
+      if(this.timer){
+          clearInterval(this.timer);
+          this.timer = null;
+      }
   }
 }
 

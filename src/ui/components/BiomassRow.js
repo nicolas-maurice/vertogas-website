@@ -29,24 +29,15 @@ class BiomassRow extends React.Component {
   render() {
       let {compo,...otherProps} = this.props;
     return (
-     
-            <TableRow {...otherProps}>
-                <TableRowColumn>
-                    <Card style={{boxShadow: 'none'}} expanded={this.state.expanded}>
-                        <CardText>{compo.biomass.name}</CardText>
-                        <CardText expandable={true}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                        </CardText>
-                    </Card>
-                </TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio * 10 / 100}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}>{compo.ratio}</TableRowColumn>
-                <TableRowColumn style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em'}}><PorduceBiomassButton onClick={()=>{
+            <div {...otherProps} style={{clear:'both'}}>
+                <div style={{float:'left',width:100/6+'%'}}>
+                {compo.biomass.name}
+                </div>
+                <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float:'left',width:100/6+'%'}}>{compo.ratio * 10 / 100}</div>
+                <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float:'left',width:100/6+'%'}}>{compo.ratio}</div>
+                <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float:'left',width:100/6+'%'}}>{compo.ratio}</div>
+                <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float:'left',width:100/6+'%'}}>{compo.ratio}</div>
+                <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float:'left',width:100/6+'%'}}><PorduceBiomassButton onClick={()=>{
                       let self = this;
                       this.setState({
                           expanded:true
@@ -54,9 +45,20 @@ class BiomassRow extends React.Component {
                       {/*setTimeout(()=>{
                           self.setState({expanded:false})
                       },3000)*/}
-                    }}/></TableRowColumn>
-            </TableRow>
-         
+                    }}/></div>
+
+                <div style={{width:'100%'}}>
+                    <Card style={{boxShadow: 'none'}} expanded={this.state.expanded}>
+                        <CardText expandable={true}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+                            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+                            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                        </CardText>
+                    </Card>
+                </div>
+            </div>
+
     );
   }
 

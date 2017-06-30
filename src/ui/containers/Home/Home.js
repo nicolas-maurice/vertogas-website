@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Paper from 'material-ui/Paper'
-import {Card, CardHeader, CardText} from 'material-ui/Card';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
 import ProducerSideBar from './ProducerSideBar'
 
 import {
@@ -16,7 +16,7 @@ import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import PorduceBiomassButton from '../../components/PorduceBiomassButton'
 import BiomassRow from '../../components/BiomassRow'
-import {getPowerPlants, selectPowerPlant, addToken,closeAddPowerPlantModal,addPowerPlant} from '../../../redux/actions';
+import { getPowerPlants, selectPowerPlant, addToken, closeAddPowerPlantModal, addPowerPlant } from '../../../redux/actions';
 import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
 
@@ -48,7 +48,7 @@ export class Home extends React.Component {
         if (this.progressTimer) {
           clearInterval(this.progressTimer);
           this.progressTimer = null;
-          this.setState({snackbarOpen: true, snackbarOpenMessage: 'You can produce your certificate'})
+          this.setState({ snackbarOpen: true, snackbarOpenMessage: 'You can produce your certificate' })
         }
       }
 
@@ -62,124 +62,45 @@ export class Home extends React.Component {
 
   }
   renderPowerPlantDetails() {
-    let {selectedPowerPlant} = this.props;
+    let { selectedPowerPlant } = this.props;
     return (
-      <div className='table_holder' style={{
-        marginBottom: 20
-      }}>
-        <h4>{selectedPowerPlant.name}
-          Composition details :</h4>
+      <div className='table_holder' style={{ marginBottom: 20 }}>
+        <h4>{selectedPowerPlant.name} Composition details :</h4>
         <div selectable={false}>
           <div displaySelectAll={false} adjustForCheckbox={false}>
-            <div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>Gaz sources</div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>Split</div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>Production Rolling Year</div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>Issued certificates</div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>Rest</div>
-              <div
-                className='table_header'
-                style={{
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}></div>
+            <div className="clearfix">
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Gaz sources</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Split</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Production Rolling Year</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Issued certificates</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Rest</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}></div>
             </div>
           </div>
           <div displayRowCheckbox={false}>
-            {selectedPowerPlant
-              .mix
-              .map((compo, key) => {
-                return (<BiomassRow compo={compo} key={key}/>)
+            {
+              selectedPowerPlant.mix.map((compo, key) => {
+                return (
+                  <BiomassRow compo={compo} key={key} />
+                )
               })
-}
-            <div
-              style={{
-              clear: 'both',
-              marginBottom: 30
-            }}>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>TOTAL</div>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>-</div>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>100</div>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>3</div>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}>1</div>
-              <div
-                style={{
-                verticalAlign: 'top',
-                height: 'auto',
-                paddingTop: '1.4em',
-                float: 'left',
-                width: 100 / 6 + '%'
-              }}></div>
+            }
+            <div style={{ marginBottom: 30 }} className="clearfix">
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>TOTAL</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>-</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>100</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>3</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>1</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}></div>
             </div>
           </div>
         </div>
-
       </div>
     )
   }
   renderCertificates() {
     if (!this.props.selectedPowerPlant.tokens) {
-      return <Waiting/>
+      return <Waiting />
     }
     return (
       <div className='table_holder'>
@@ -204,81 +125,80 @@ export class Home extends React.Component {
                     <TableRowColumn>{token.certifID}</TableRowColumn>
                     <TableRowColumn>{token.owner}</TableRowColumn>
                     <TableRowColumn>{token.issuedDate
-                        ? token.issuedDate
-                        : '11/12/2017'}</TableRowColumn>
-                    <TableRowColumn><TokenStatusButton claimed={token.isClaimed}/></TableRowColumn>
+                      ? token.issuedDate
+                      : '11/12/2017'}</TableRowColumn>
+                    <TableRowColumn><TokenStatusButton claimed={token.isClaimed} /></TableRowColumn>
                   </TableRow>
                 )
               })
-}
+            }
           </TableBody>
         </Table>
       </div>
     )
   }
-  makeFakeId()
-  {
+  makeFakeId() {
     var text = "";
     var possible = "0123456789abcdef";
 
-    for (var i = 0; i < 64; i++) 
+    for (var i = 0; i < 64; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
-    
+
     return '0x' + text;
   }
-  
-  _addPowerPlant(powerPlant){
+
+  _addPowerPlant(powerPlant) {
     let pp = {
-       "id": 'PP'+powerPlant.name, 
-        "metaData": "0xba5eba1100000000babebabe0000000000000000000000000000000000000000", 
-        "mix": powerPlant.mix.map((el)=>{
-          return  {
-            "biomass": {
-              "id": el.id, 
-              "name": el.name
-            }, 
-            "ratio": el.ratio
-          }
-        }),
-        "name": powerPlant.name, 
-        "owner": this.props.owner.address,
-        "tokens": []
+      "id": 'PP' + powerPlant.name,
+      "metaData": "0xba5eba1100000000babebabe0000000000000000000000000000000000000000",
+      "mix": powerPlant.mix.map((el) => {
+        return {
+          "biomass": {
+            "id": el.id,
+            "name": el.name
+          },
+          "ratio": el.ratio
+        }
+      }),
+      "name": powerPlant.name,
+      "owner": this.props.owner.address,
+      "tokens": []
     }
     this.props.addPowerPlant(pp);
   }
   render() {
-    const {powerPlants, selectedPowerPlant, selectPowerPlant,addPowerPlantModalOpened} = this.props;
+    const { powerPlants, selectedPowerPlant, selectPowerPlant, addPowerPlantModalOpened } = this.props;
     if (!selectedPowerPlant) {
-      return <Waiting/>
+      return <Waiting />
     }
     return (
       <Paper
         zDepth={3}
         style={{
-        height: "100%",
-        backgroundColor: "transparent"
-      }}>
+          height: "100%",
+          backgroundColor: "transparent"
+        }}>
         <ProducerSideBar
           powerPlants={powerPlants}
           progress={this.state.progress}
           onChangeSelectedPowerPlant={(selectedP) => {
-          selectPowerPlant(selectedP);
-        }}
+            selectPowerPlant(selectedP);
+          }}
           onProduce={(powerPlant) => {
-          this.setState({progress: 0, snackbarOpen: false, snackbarOpenMessage: ''});
-          this.setProgressTimer();
-          this
-            .props
-            .addToken(powerPlant, {
-              "certifID": this.makeFakeId(),
-              "claimer": null,
-              "id": 3,
-              "isClaimed": false,
-              "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000",
-              "owner": this.props.owner.address
-            })
-        }}
-          selectedPowerPlant={selectedPowerPlant}/>
+            this.setState({ progress: 0, snackbarOpen: false, snackbarOpenMessage: '' });
+            this.setProgressTimer();
+            this
+              .props
+              .addToken(powerPlant, {
+                "certifID": this.makeFakeId(),
+                "claimer": null,
+                "id": 3,
+                "isClaimed": false,
+                "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000",
+                "owner": this.props.owner.address
+              })
+          }}
+          selectedPowerPlant={selectedPowerPlant} />
         <div style={producerBody}>
           <div style={{
             margin: 20
@@ -292,22 +212,22 @@ export class Home extends React.Component {
                 href="#"
                 className='change_key'
                 onClick={(e) => {
-                e.preventDefault()
-              }}>CHANGER</a>
+                  e.preventDefault()
+                }}>CHANGER</a>
             </div>
             {this.renderPowerPlantDetails()}
             {this.renderCertificates()
-}
+            }
           </div>
           <Snackbar
             open={this.state.snackbarOpen}
             message={this.state.snackbarOpenMessage}
-            autoHideDuration={3000}/>
+            autoHideDuration={3000} />
         </div>
         <AddPowerPlantModal addPowerPlantModalOpened={addPowerPlantModalOpened}
-                            addPowerPlant={this._addPowerPlant}
-                            closeModal={this.props.closeAddPowerPlantModal}/>
-        
+          addPowerPlant={this._addPowerPlant}
+          closeModal={this.props.closeAddPowerPlantModal} />
+
       </Paper>
     )
   }
@@ -322,11 +242,11 @@ export class Home extends React.Component {
 };
 
 const mapStateToProps = (state) => ({
-    powerPlants: state.powerPlants, 
-    owner: state.owner,
-    selectedPowerPlant: state.ui.selectedPowerPlant,
-    addPowerPlantModalOpened:state.ui.addPowerPlantModalOpened
-  })
+  powerPlants: state.powerPlants,
+  owner: state.owner,
+  selectedPowerPlant: state.ui.selectedPowerPlant,
+  addPowerPlantModalOpened: state.ui.addPowerPlantModalOpened
+})
 
 let actions = {
   getPowerPlants,

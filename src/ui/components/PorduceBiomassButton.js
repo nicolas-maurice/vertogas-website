@@ -41,21 +41,8 @@ class PorduceBiomassButton extends React.Component {
               labelStyle={{textTransform: 'none'}}
               style={{height:28}}
               buttonStyle={{lineHeight:'28px'}}
-            >
-             {pending ? (
-               <CircularProgress 
-                size={20} 
-                thickness={3} 
-                color="#000"
-                style={{
-                    position: "relative",
-                    left: "3px",
-                    top: "3px"
-                }}
-              />
-             ): null}
-              
-            </RaisedButton>
+            />
+             
       );
   }
     

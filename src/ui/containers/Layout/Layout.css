@@ -18,3 +18,9 @@ body{
     margin: 17px !important;
     margin-left: 50px !important;
 }
+
+.clearfix:after {
+    content: " ";
+    display: block;
+    clear: both;
+}

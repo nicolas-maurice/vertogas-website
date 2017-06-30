@@ -5,6 +5,7 @@ import {
     TableRowColumn,
     TableBody
 } from 'material-ui/Table';
+import LinearProgress from 'material-ui/LinearProgress';
 import PorduceBiomassButton from './PorduceBiomassButton'
 class BiomassRow extends React.Component {
     constructor(props) {
@@ -12,7 +13,8 @@ class BiomassRow extends React.Component {
         this.state = {
             expanded: false,
             amount: 0,
-            issued: 0
+            issued: 0,
+            completed: 0,
         };
     }
     renderDetailsRow() {
@@ -28,44 +30,65 @@ class BiomassRow extends React.Component {
         }
     }
 
+    componentDidMount() {
+        this.timer = setTimeout(() => this.progress(5), 1000);
+    }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+
+    progress(completed) {
+        if (completed > 100) {
+            this.setState({ completed: 100 });
+
+            this.setState({ expanded: false, issued: this.state.issued + 1 });
+            clearTimeout(self.timer);
+        } else {
+            this.setState({ completed });
+            const diff = Math.random() * 10;
+            this.timer = setTimeout(() => this.progress(completed + diff), 1000);
+        }
+    }
+
     render() {
-        let { compo, ...otherProps } = this.props;
+        let { compo } = this.props;
         return (
-            <div {...otherProps} style={{ clear: 'both' }}>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em',float: 'left', width: 100 / 6 + '%' }}>
-                    {compo.biomass.name}
-                </div>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Math.abs(this.state.amount.toFixed(1))}</div>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.state.issued}</div>
-                <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
-                    <PorduceBiomassButton disabled={this.state.amount.toFixed(1) < 1}
-                        onClick={() => {
-                            let self = this;
-                            this.setState({
-                                expanded: true,
-                                amount: this.state.amount - 1
-                            });
-                            setTimeout(() => {
-                                self.setState({ expanded: false, issued: this.state.issued + 1 })
-                            }, 3000)
-                        }}
-                    />
+            <div className="clearfix">
+                <div className="clearfix">
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
+                        {compo.biomass.name}
+                    </div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>                    
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Math.abs(this.state.amount.toFixed(1))}</div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.state.issued}</div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
+                        <PorduceBiomassButton disabled={this.state.amount.toFixed(1) < 1}
+                            onClick={() => {
+                                let self = this;
+                                this.setState({
+                                    expanded: true,
+                                    amount: this.state.amount - 1
+                                });
+                                this.timer = setTimeout(() => this.progress(5), 1000);
+
+                            }}
+                        />
+                    </div>
                 </div>
 
-                <div style={{ width: '100%' }}>
+
+                <div style={{ width: '100%' }} className="clearfix">
                     <Card style={{ boxShadow: 'none' }} expanded={this.state.expanded}>
-                        <CardText expandable={true}>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+                        <CardText expandable={true} className="clearfix">
+                            <div style={{float:'left'}}>Lorem ipsum dolor sit amet:</div> 
+                            <div style={{float:'left', width:200 / 3 +'%', padding:7}}><LinearProgress mode="determinate" value={this.state.completed} color="#fec61a"/></div>
                         </CardText>
                     </Card>
                 </div>
             </div>
-    );
+        );
     }
 
     componentDidMount() {

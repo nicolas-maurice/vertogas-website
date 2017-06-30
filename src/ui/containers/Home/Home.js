@@ -15,7 +15,8 @@ import {
 import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import PorduceBiomassButton from '../../components/PorduceBiomassButton'
-import BiomassRow from '../../components/BiomassRow'
+import BiomassRow from '../../components/BiomassRow';
+import TokenRow from '../../components/TokenRow';
 import { getPowerPlants, selectPowerPlant, addToken, closeAddPowerPlantModal, addPowerPlant } from '../../../redux/actions';
 import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
@@ -37,6 +38,7 @@ export class Home extends React.Component {
     }
     this.renderCertificates = this.renderCertificates.bind(this);
     this._addPowerPlant = this._addPowerPlant.bind(this);
+    this.addNewToken = this.addNewToken.bind(this);
   }
   setProgressTimer() {
     this.progressTimer = setInterval(() => {
@@ -66,8 +68,8 @@ export class Home extends React.Component {
     return (
       <div className='table_holder' style={{ marginBottom: 20 }}>
         <h4>{selectedPowerPlant.name} Composition details :</h4>
-        <div selectable={false}>
-          <div displaySelectAll={false} adjustForCheckbox={false}>
+        <div>
+          <div>
             <div className="clearfix">
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Gaz sources</div>
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Split</div>
@@ -77,11 +79,11 @@ export class Home extends React.Component {
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}></div>
             </div>
           </div>
-          <div displayRowCheckbox={false}>
+          <div>
             {
               selectedPowerPlant.mix.map((compo, key) => {
                 return (
-                  <BiomassRow compo={compo} key={key} />
+                  <BiomassRow compo={compo} key={key} addNewToken={this.addNewToken} />
                 )
               })
             }
@@ -120,15 +122,8 @@ export class Home extends React.Component {
               .selectedPowerPlant
               .tokens
               .map((token, key) => {
-                return (
-                  <TableRow key={key}>
-                    <TableRowColumn>{token.certifID}</TableRowColumn>
-                    <TableRowColumn>{token.owner}</TableRowColumn>
-                    <TableRowColumn>{token.issuedDate
-                      ? token.issuedDate
-                      : '11/12/2017'}</TableRowColumn>
-                    <TableRowColumn><TokenStatusButton claimed={token.isClaimed} /></TableRowColumn>
-                  </TableRow>
+                return(
+                  <TokenRow key={key} token={token}/>
                 )
               })
             }
@@ -166,11 +161,23 @@ export class Home extends React.Component {
     }
     this.props.addPowerPlant(pp);
   }
+  addNewToken(){
+      this.props.addToken(this.props.selectedPowerPlant, {
+                  "certifID": this.makeFakeId(),
+                  "claimer": null,
+                  "id": this.makeFakeId(),
+                  "isClaimed": false,
+                  "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000",
+                  "owner": this.props.owner.address,
+                  "createDate": new Date().getTime()
+      })
+  }
   render() {
     const { powerPlants, selectedPowerPlant, selectPowerPlant, addPowerPlantModalOpened } = this.props;
     if (!selectedPowerPlant) {
       return <Waiting />
     }
+
     return (
       <Paper
         zDepth={3}
@@ -192,10 +199,11 @@ export class Home extends React.Component {
               .addToken(powerPlant, {
                 "certifID": this.makeFakeId(),
                 "claimer": null,
-                "id": 3,
+                "id": this.makeFakeId(),
                 "isClaimed": false,
                 "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000",
-                "owner": this.props.owner.address
+                "owner": this.props.owner.address,
+                "createDate": new Date().getTime()
               })
           }}
           selectedPowerPlant={selectedPowerPlant} />

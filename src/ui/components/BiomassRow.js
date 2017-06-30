@@ -44,6 +44,7 @@ class BiomassRow extends React.Component {
 
             this.setState({ expanded: false, issued: this.state.issued + 1 });
             clearTimeout(self.timer);
+            this.props.addNewToken();
         } else {
             this.setState({ completed });
             const diff = Math.random() * 10;

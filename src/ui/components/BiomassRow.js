@@ -52,15 +52,15 @@ class BiomassRow extends React.Component {
     }
 
     render() {
-        let { compo, ...otherProps } = this.props;
+        let { compo } = this.props;
         return (
-            <div {...otherProps} className="clearfix">
+            <div className="clearfix">
                 <div className="clearfix">
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
                         {compo.biomass.name}
                     </div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>                    
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Math.abs(this.state.amount.toFixed(1))}</div>
-                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.state.issued}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>

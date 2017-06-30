@@ -1,10 +1,10 @@
 import React, { 
   PropTypes 
 } from 'react';
-
+import {connect} from 'react-redux';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import autoprefixer from 'material-ui/utils/autoprefixer';
-
+import {openAddPowerPlantModal} from '../../../redux/actions';
 import AppBar from './AppBar';
 import SideBar from './SideBar';
 import defaultTheme from '../defaultTheme';
@@ -51,7 +51,7 @@ const Layout = (props) => {
   
   return (
     <div style={prefixedStyles.main} >
-      <AppBar title={title} />
+      <AppBar title={title} onAddPowerPlants={props.openAddPowerPlantModal} />
       <div className="body" style={prefixedStyles.body}>
         <div style={prefixedStyles.content}>{ children }</div>
         <SideBar>
@@ -73,4 +73,9 @@ Layout.defaultProps = {
   theme: defaultTheme,
 }
 
-export default Layout;
+
+let actions = {
+ openAddPowerPlantModal
+}
+
+export default connect(null, actions)(Layout);

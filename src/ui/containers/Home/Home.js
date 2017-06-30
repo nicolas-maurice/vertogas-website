@@ -2,9 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux';
 import Paper from 'material-ui/Paper'
 import {Card, CardHeader, CardText} from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import ProducerSideBar from './ProducerSideBar'
-import Dialog from 'material-ui/Dialog';
+
 import {
   Table,
   TableBody,
@@ -18,6 +17,7 @@ import TokenStatusButton from '../../components/TokenStatusButton'
 import PorduceBiomassButton from '../../components/PorduceBiomassButton'
 import BiomassRow from '../../components/BiomassRow'
 import {getPowerPlants, selectPowerPlant, addToken,closeAddPowerPlantModal} from '../../../redux/actions';
+import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
 
 const producerBody = {
@@ -230,13 +230,6 @@ export class Home extends React.Component {
     this.props.closeAddPowerPlantModal()
   }
   render() {
-    const actions = [ 
-              <FlatButton label = "Cancel" primary= {true}
-                          onTouchTap = {this.handleClose} />, 
-              <FlatButton label = "Create power plant" primary = {true}
-                          disabled = {true}
-                          onTouchTap={this.handleClose}/>
-    ];
     const {powerPlants, selectedPowerPlant, selectPowerPlant,addPowerPlantModalOpened} = this.props;
     if (!selectedPowerPlant) {
       return <Waiting/>
@@ -294,10 +287,8 @@ export class Home extends React.Component {
             message={this.state.snackbarOpenMessage}
             autoHideDuration={3000}/>
         </div>
-
-        <Dialog title="Add power plant" actions={actions} modal={true} open={addPowerPlantModalOpened}>
-          Only actions can close this dialog.
-        </Dialog>
+        <AddPowerPlantModal addPowerPlantModalOpened={addPowerPlantModalOpened}/>
+        
       </Paper>
     )
   }

@@ -199,10 +199,11 @@ export class Home extends React.Component {
               .addToken(powerPlant, {
                 "certifID": this.makeFakeId(),
                 "claimer": null,
-                "id": 3,
+                "id": this.makeFakeId(),
                 "isClaimed": false,
                 "metaData": "0xbeefdeadbabe1337133700000000000000000000000000000000000000000000",
-                "owner": this.props.owner.address
+                "owner": this.props.owner.address,
+                "createDate": new Date().getTime()
               })
           }}
           selectedPowerPlant={selectedPowerPlant} />

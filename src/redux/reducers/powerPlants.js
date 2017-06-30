@@ -4,26 +4,27 @@ import {
 import {
   POWER_PLANTS,
   FETCH_FAILURE,
-  ADD_TOKEN
+  ADD_TOKEN,
+  ADD_POWERPLANT
 } from '../actions';
 /**
  * Reducers related to powerPlants handling
  */
 
 /* reducer responsible for powerPlants management */
-const powerPlantsReducer = (state = null, action) => {
+const powerPlantsReducer = (state = [], action) => {
   switch (action.type) {
     case `${POWER_PLANTS}_SUCCESS`:
       return action.payload;
     case `${POWER_PLANTS}_FAILURE`:
       if (action.payload.status === 401) {
-        return null;
+        return [];
       } else {
         return state;
       }    
     case `${FETCH_FAILURE}`:
       if (action.payload.status === 401) {
-        return null;
+        return [];
       } else {
         return state;
       }
@@ -37,6 +38,9 @@ const powerPlantsReducer = (state = null, action) => {
         }
         return pp;
     });
+    case ADD_POWERPLANT:
+    return state.concat([action.payload])
+
     default:
       return state;
   }

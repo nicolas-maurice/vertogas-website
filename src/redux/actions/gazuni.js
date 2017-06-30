@@ -30,6 +30,12 @@ export const getPowerPlants = (owner) => ({
   }
 })
 
+export const ADD_POWERPLANT = "ADD_POWERPLANT";
+export const addPowerPlant = (powerPlant) => ({
+  type: ADD_POWERPLANT,
+  payload: powerPlant
+})
+
 /* For getting owner tokens */
 export const OWNER_TOKENS = 'OWNER_TOKENS';
 export const OWNER_TOKENS_REQUEST = 'OWNER_TOKENS_REQUEST';

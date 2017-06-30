@@ -16,7 +16,7 @@ import Snackbar from 'material-ui/Snackbar';
 import TokenStatusButton from '../../components/TokenStatusButton'
 import PorduceBiomassButton from '../../components/PorduceBiomassButton'
 import BiomassRow from '../../components/BiomassRow'
-import {getPowerPlants, selectPowerPlant, addToken,closeAddPowerPlantModal} from '../../../redux/actions';
+import {getPowerPlants, selectPowerPlant, addToken,closeAddPowerPlantModal,addPowerPlant} from '../../../redux/actions';
 import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
 
@@ -36,7 +36,7 @@ export class Home extends React.Component {
       snackbarOpenMessage: ''
     }
     this.renderCertificates = this.renderCertificates.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    this._addPowerPlant = this._addPowerPlant.bind(this);
   }
   setProgressTimer() {
     this.progressTimer = setInterval(() => {
@@ -226,8 +226,25 @@ export class Home extends React.Component {
     
     return '0x' + text;
   }
-  handleClose() {
-    this.props.closeAddPowerPlantModal()
+  
+  _addPowerPlant(powerPlant){
+    let pp = {
+       "id": 'PP'+powerPlant.name, 
+        "metaData": "0xba5eba1100000000babebabe0000000000000000000000000000000000000000", 
+        "mix": powerPlant.mix.map((el)=>{
+          return  {
+            "biomass": {
+              "id": el.id, 
+              "name": el.name
+            }, 
+            "ratio": el.ratio
+          }
+        }),
+        "name": powerPlant.name, 
+        "owner": this.props.owner.address,
+        "tokens": []
+    }
+    this.props.addPowerPlant(pp);
   }
   render() {
     const {powerPlants, selectedPowerPlant, selectPowerPlant,addPowerPlantModalOpened} = this.props;
@@ -287,7 +304,9 @@ export class Home extends React.Component {
             message={this.state.snackbarOpenMessage}
             autoHideDuration={3000}/>
         </div>
-        <AddPowerPlantModal addPowerPlantModalOpened={addPowerPlantModalOpened}/>
+        <AddPowerPlantModal addPowerPlantModalOpened={addPowerPlantModalOpened}
+                            addPowerPlant={this._addPowerPlant}
+                            closeModal={this.props.closeAddPowerPlantModal}/>
         
       </Paper>
     )
@@ -313,7 +332,8 @@ let actions = {
   getPowerPlants,
   selectPowerPlant,
   addToken,
-  closeAddPowerPlantModal
+  closeAddPowerPlantModal,
+  addPowerPlant
 }
 
 export default connect(mapStateToProps, actions)(Home);

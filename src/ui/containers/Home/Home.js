@@ -69,7 +69,7 @@ export class Home extends React.Component {
           <h4>{selectedPowerPlant.name} Composition details :</h4>
           <div selectable={false}>
               <div displaySelectAll={false} adjustForCheckbox={false}>
-                  <div>
+                  <div  className="clearfix">
                       <div className='table_header' style={{float:'left',width:100/6+'%'}}>Gaz sources</div>
                       <div className='table_header' style={{float:'left',width:100/6+'%'}}>Split</div>
                       <div className='table_header' style={{float:'left',width:100/6+'%'}}>Production Rolling Year</div>
@@ -86,7 +86,7 @@ export class Home extends React.Component {
                       )
                     })
                   }
-                  <div style={{clear:'both', marginBottom:30}}>
+                  <div style={{ marginBottom:30}} className="clearfix">
                       <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>TOTAL</div>
                       <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>-</div>
                       <div style={{verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float:'left',width:100/6+'%'}}>100</div>

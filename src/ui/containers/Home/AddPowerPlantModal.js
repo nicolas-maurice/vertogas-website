@@ -169,7 +169,7 @@ class AddPowerPlantModal extends React.Component {
                                         })
                                     }
                                 </SelectField>
-                                <TextField underlineShow={false} hintText="Ratio" value={mix.ratio} onChange={this.handleRatioChange.bind(this, mix)} style={{float: 'left',border: "1px solid #000",paddingLeft: 10, marginLeft:10, width: 60}}/>
+                                <TextField underlineShow={false} hintText="Ratio" type="number" max={100} value={mix.ratio} onChange={this.handleRatioChange.bind(this, mix)} style={{float: 'left',border: "1px solid #000",paddingLeft: 10, marginLeft:10, width: 60}}/>
                                 <FlatButton label=" remove biomass" primary={true}
                                     onTouchTap={this.handleRemoveBiomass.bind(this, mix)}  style={{float: 'left'}}/>
                             </div>

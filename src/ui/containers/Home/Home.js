@@ -31,7 +31,7 @@ export class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      progress: 80,
+      progress: 0,
       snackbarOpen: false,
       snackbarOpenMessage: ''
     }
@@ -52,7 +52,7 @@ export class Home extends React.Component {
         }
       }
 
-    }, 750)
+    }, 3000)
   }
   componentDidMount() {
     this

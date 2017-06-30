@@ -82,10 +82,10 @@ const ProducerSideBar = (props) => {
 
       <PieChartWrapper data={data} tagColors={tagColors} activeIndex={activeIndex}/>
 
-       <div className='issuedcertificatesLabel'>ISSUED CERTFICIATE : {selectedPowerPlant.tokens.length}</div>
+       <div className='issuedcertificatesLabel'>Total volume produces : 10m<sup>3</sup></div>
    
        <button className="progress-button" data-style="fill" data-horizontal="" onClick={()=>onProduce(selectedPowerPlant)} disabled={progress < 100 ? true:null}>
-          <span className="content">Produce</span>
+          <span className="content"> &nbsp; </span>
           <span className="progress">
             <span className="progress-inner" style={{width:`${progress}%`}}></span>
           </span>

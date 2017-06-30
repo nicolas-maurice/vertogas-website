@@ -33,7 +33,7 @@ const powerPlantsReducer = (state = [], action) => {
         if(pp.id === action.payload.powerPlant.id){
             return {
                 ...pp,
-                tokens:pp.tokens.concat([action.payload.token])
+                tokens:[action.payload.token].concat(pp.tokens)
             }
         }
         return pp;

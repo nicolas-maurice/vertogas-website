@@ -61,7 +61,7 @@ export default (state = initialState, { type, payload }) => {
       ...state,
       selectedPowerPlant:{
         ...state.selectedPowerPlant,
-        tokens:state.selectedPowerPlant.tokens.concat([payload.token])
+        tokens:[payload.token].concat(state.selectedPowerPlant.tokens)
       }
     }
     case OPEN_ADD_POWERPLANT_MODAL:

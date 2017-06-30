@@ -32,3 +32,13 @@ export const selectPowerPlant=(powerPlant)=>({
   type:SELECT_POWER_PLANT,
   payload: powerPlant
 })
+
+export const OPEN_ADD_POWERPLANT_MODAL = "OPEN_ADD_POWERPLANT_MODAL";
+export const openAddPowerPlantModal=()=>({
+  type:OPEN_ADD_POWERPLANT_MODAL
+})
+
+export const CLOSE_ADD_POWERPLANT_MODAL = "CLOSE_ADD_POWERPLANT_MODAL";
+export const closeAddPowerPlantModal=()=>({
+  type:CLOSE_ADD_POWERPLANT_MODAL
+})

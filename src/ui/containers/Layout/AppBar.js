@@ -24,6 +24,9 @@ const AppBar = (props) => {
      <div className="topBar">
         <img src={Logo} alt="Gasuni logo"/>
         <IconButton iconStyle={styles.mediumIcon}
+                    onTouchTap={
+                      props.onAddPowerPlants  
+                    }
                     style={styles.medium}>
           <Add color='#FFF'/>
         </IconButton>

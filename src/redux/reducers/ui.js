@@ -5,13 +5,16 @@ import {
   SET_USER_BOX_VISIBILITY,
   SELECT_POWER_PLANT,
   POWER_PLANTS_SUCCESS,
-  ADD_TOKEN
+  ADD_TOKEN,
+  OPEN_ADD_POWERPLANT_MODAL,
+  CLOSE_ADD_POWERPLANT_MODAL
 } from '../actions';
 
 const initialState = {
   sidebarOpen: true,
   userBoxOpen: false,
-  selectedPowerPlant: null
+  selectedPowerPlant: null,
+  addPowerPlantModalOpened:false
 }
 
 /* ui reducer */
@@ -61,6 +64,16 @@ export default (state = initialState, { type, payload }) => {
         tokens:state.selectedPowerPlant.tokens.concat([payload.token])
       }
     }
+    case OPEN_ADD_POWERPLANT_MODAL:
+      return{
+        ...state,
+        addPowerPlantModalOpened:true
+      }
+    case CLOSE_ADD_POWERPLANT_MODAL:
+      return{
+        ...state,
+        addPowerPlantModalOpened:false
+      }
 
     default:
       return state;

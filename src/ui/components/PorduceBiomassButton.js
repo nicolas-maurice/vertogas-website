@@ -5,9 +5,6 @@ import CircularProgress from 'material-ui/CircularProgress';
 class PorduceBiomassButton extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            pending:false
-        }
         this.produceBioMass = this.produceBioMass.bind(this);
   }
 
@@ -18,11 +15,13 @@ class PorduceBiomassButton extends React.Component {
   }
 
   render(){
-    const {pending} = this.state;
-    let {disabled} = this.props;
+    let {disabled,pending} = this.props;
       return (
         <RaisedButton
               onClick={() => {
+                if(pending){
+                  return
+                }
                 if(this.props.onClick) {
                     this.props.onClick();
                 }

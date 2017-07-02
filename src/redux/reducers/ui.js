@@ -8,7 +8,8 @@ import {
   ADD_TOKEN,
   OPEN_ADD_POWERPLANT_MODAL,
   CLOSE_ADD_POWERPLANT_MODAL,
-  UPDATE_TOTAL_PRODUCED
+  UPDATE_TOTAL_PRODUCED,
+  UPDATE_TOTAL_ISSUED_CERTIFICATES
 } from '../actions';
 
 const initialState = {
@@ -16,7 +17,8 @@ const initialState = {
   userBoxOpen: false,
   selectedPowerPlant: null,
   addPowerPlantModalOpened:false,
-  totalProduced:10
+  totalProduced:10,
+  totalIssuedCertificates:0
 }
 
 /* ui reducer */
@@ -80,6 +82,11 @@ export default (state = initialState, { type, payload }) => {
      return {
        ...state,
        totalProduced:payload
+     }
+     case UPDATE_TOTAL_ISSUED_CERTIFICATES:
+     return {
+       ...state,
+       totalIssuedCertificates:payload
      }
     default:
       return state;

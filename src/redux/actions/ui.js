@@ -48,3 +48,9 @@ export const updateTotalProduced = (total)=>({
   type:UPDATE_TOTAL_PRODUCED,
   payload:total
 })
+
+export const UPDATE_TOTAL_ISSUED_CERTIFICATES = "UPDATE_TOTAL_ISSUED_CERTIFICATES";
+export const updateTotalIssuedCertificates = (total)=>({
+  type:UPDATE_TOTAL_ISSUED_CERTIFICATES,
+  payload:total
+})

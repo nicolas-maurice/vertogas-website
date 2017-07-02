@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
 import PorduceBiomassButton from './PorduceBiomassButton';
-
+import {updateTotalProduced,updateTotalIssuedCertificates } from '../../redux/actions';
 class BiomassRow extends React.Component {
     constructor(props) {
         super(props);
@@ -42,9 +42,8 @@ class BiomassRow extends React.Component {
 
     progress(completed) {
         if (completed > 100) {
-            this.setState({ completed: 100 });
-
-            this.setState({ expanded: false, issued: this.state.issued + 1 });
+            this.setState({ expanded: false, issued: this.state.issued + 1,completed:0 });
+            this.props.updateTotalIssuedCertificates(this.props.totalIssuedCertificates + 1)
             clearTimeout(self.timer);
             this.props.addNewToken();
         } else {
@@ -65,15 +64,17 @@ class BiomassRow extends React.Component {
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>                    
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Number(this.props.totalProduced * compo.ratio / 100).toFixed(2)}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.state.issued}</div>
-                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Number(compo.ratio/100).toFixed(2)}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
-                        <PorduceBiomassButton disabled={this.state.amount.toFixed(1) < 1}
+                        <PorduceBiomassButton 
+                            pending={this.state.expanded}
+                            disabled={Number(this.props.totalProduced * compo.ratio / 100).toFixed(2) < 1}
                             onClick={() => {
                                 let self = this;
                                 this.setState({
-                                    expanded: true,
-                                    amount: this.state.amount - 1
+                                    expanded: true
                                 });
+                                this.props.updateTotalProduced(this.props.totalProduced - 1);
                                 this.timer = setTimeout(() => this.progress(5), 1000);
 
                             }}
@@ -117,10 +118,13 @@ class BiomassRow extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-  totalProduced:state.ui.totalProduced
+  totalProduced:state.ui.totalProduced,
+   totalIssuedCertificates:state.ui.totalIssuedCertificates
 })
 
 let actions = {
+    updateTotalProduced,
+    updateTotalIssuedCertificates
 }
 
 export default connect(mapStateToProps, actions)(BiomassRow);

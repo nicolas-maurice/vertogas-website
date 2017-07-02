@@ -74,7 +74,7 @@ export class Home extends React.Component {
             <div className="clearfix">
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Gaz sources</div>
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Split</div>
-              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Production Rolling Year</div>
+              <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>m<sup>3</sup> produced</div>
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Issued certificates</div>
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}>Rest</div>
               <div className='table_header' style={{ float: 'left', width: 100 / 6 + '%' }}></div>
@@ -90,9 +90,9 @@ export class Home extends React.Component {
             }
             <div style={{ marginBottom: 30 }} className="clearfix">
               <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>TOTAL</div>
-              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>-</div>
-              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>100</div>
-              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>3</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>100%</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Number(this.props.totalProduced).toFixed(2)}</div>
+              <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.props.totalIssuedCertificates}</div>
               <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>1</div>
               <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}></div>
             </div>
@@ -256,7 +256,8 @@ const mapStateToProps = (state) => ({
   owner: state.owner,
   selectedPowerPlant: state.ui.selectedPowerPlant,
   addPowerPlantModalOpened: state.ui.addPowerPlantModalOpened,
-  totalProduced:state.ui.totalProduced
+  totalProduced:state.ui.totalProduced,
+  totalIssuedCertificates:state.ui.totalIssuedCertificates
 })
 
 let actions = {

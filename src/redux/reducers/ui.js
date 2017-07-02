@@ -7,14 +7,16 @@ import {
   POWER_PLANTS_SUCCESS,
   ADD_TOKEN,
   OPEN_ADD_POWERPLANT_MODAL,
-  CLOSE_ADD_POWERPLANT_MODAL
+  CLOSE_ADD_POWERPLANT_MODAL,
+  UPDATE_TOTAL_PRODUCED
 } from '../actions';
 
 const initialState = {
   sidebarOpen: true,
   userBoxOpen: false,
   selectedPowerPlant: null,
-  addPowerPlantModalOpened:false
+  addPowerPlantModalOpened:false,
+  totalProduced:10
 }
 
 /* ui reducer */
@@ -74,7 +76,11 @@ export default (state = initialState, { type, payload }) => {
         ...state,
         addPowerPlantModalOpened:false
       }
-
+    case UPDATE_TOTAL_PRODUCED:
+     return {
+       ...state,
+       totalProduced:payload
+     }
     default:
       return state;
   }

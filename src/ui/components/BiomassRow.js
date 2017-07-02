@@ -5,8 +5,10 @@ import {
     TableRowColumn,
     TableBody
 } from 'material-ui/Table';
+import { connect } from 'react-redux';
 import LinearProgress from 'material-ui/LinearProgress';
-import PorduceBiomassButton from './PorduceBiomassButton'
+import PorduceBiomassButton from './PorduceBiomassButton';
+
 class BiomassRow extends React.Component {
     constructor(props) {
         super(props);
@@ -61,7 +63,7 @@ class BiomassRow extends React.Component {
                         {compo.biomass.name}
                     </div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>                    
-                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Math.abs(this.state.amount.toFixed(1))}</div>
+                    <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{Number(this.props.totalProduced * compo.ratio / 100).toFixed(2)}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{this.state.issued}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>{compo.ratio}</div>
                     <div style={{ verticalAlign: 'top', height: 'auto', paddingTop: '1.4em', float: 'left', width: 100 / 6 + '%' }}>
@@ -113,4 +115,12 @@ class BiomassRow extends React.Component {
     }
 }
 
-export default BiomassRow;
+
+const mapStateToProps = (state) => ({
+  totalProduced:state.ui.totalProduced
+})
+
+let actions = {
+}
+
+export default connect(mapStateToProps, actions)(BiomassRow);

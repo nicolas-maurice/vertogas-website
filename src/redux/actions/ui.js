@@ -42,3 +42,9 @@ export const CLOSE_ADD_POWERPLANT_MODAL = "CLOSE_ADD_POWERPLANT_MODAL";
 export const closeAddPowerPlantModal=()=>({
   type:CLOSE_ADD_POWERPLANT_MODAL
 })
+
+export const UPDATE_TOTAL_PRODUCED = "UPDATE_TOTAL_PRODUCED";
+export const updateTotalProduced = (total)=>({
+  type:UPDATE_TOTAL_PRODUCED,
+  payload:total
+})

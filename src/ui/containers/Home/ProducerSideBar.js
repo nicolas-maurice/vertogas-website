@@ -28,7 +28,7 @@ const styles = {
 
 
 const ProducerSideBar = (props) => {
-  const {powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant,progress,onProduce} = props;
+  const {powerPlants,selectedPowerPlant,onChangeSelectedPowerPlant,progress,onProduce,totalProduced} = props;
   let data = selectedPowerPlant.mix.map((m)=>{
     return {name:m.biomass.name,value:m.ratio}
   })
@@ -82,7 +82,7 @@ const ProducerSideBar = (props) => {
 
       <PieChartWrapper data={data} tagColors={tagColors} activeIndex={activeIndex}/>
 
-       <div className='issuedcertificatesLabel'>Total volume produces : 10m<sup>3</sup></div>
+       <div className='issuedcertificatesLabel'>Total volume produces : {Number(totalProduced).toFixed(2)}m<sup>3</sup></div>
    
        <button className="progress-button" data-style="fill" data-horizontal="" onClick={()=>onProduce(selectedPowerPlant)} disabled={progress < 100 ? true:null}>
           <span className="content"> &nbsp; </span>

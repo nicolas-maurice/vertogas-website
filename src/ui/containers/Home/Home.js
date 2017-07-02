@@ -17,7 +17,7 @@ import TokenStatusButton from '../../components/TokenStatusButton'
 import PorduceBiomassButton from '../../components/PorduceBiomassButton'
 import BiomassRow from '../../components/BiomassRow';
 import TokenRow from '../../components/TokenRow';
-import { getPowerPlants, selectPowerPlant, addToken, closeAddPowerPlantModal, addPowerPlant } from '../../../redux/actions';
+import { getPowerPlants, selectPowerPlant, addToken, closeAddPowerPlantModal, addPowerPlant,updateTotalProduced } from '../../../redux/actions';
 import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
 
@@ -46,6 +46,7 @@ export class Home extends React.Component {
         this.setState({
           progress: this.state.progress + 1
         })
+        this.props.updateTotalProduced(this.props.totalProduced + 0.1)
       } else {
         if (this.progressTimer) {
           clearInterval(this.progressTimer);
@@ -173,7 +174,7 @@ export class Home extends React.Component {
       })
   }
   render() {
-    const { powerPlants, selectedPowerPlant, selectPowerPlant, addPowerPlantModalOpened } = this.props;
+    const { powerPlants, selectedPowerPlant, selectPowerPlant, addPowerPlantModalOpened,totalProduced } = this.props;
     if (!selectedPowerPlant) {
       return <Waiting />
     }
@@ -188,6 +189,7 @@ export class Home extends React.Component {
         <ProducerSideBar
           powerPlants={powerPlants}
           progress={this.state.progress}
+          totalProduced={totalProduced}
           onChangeSelectedPowerPlant={(selectedP) => {
             selectPowerPlant(selectedP);
           }}
@@ -253,7 +255,8 @@ const mapStateToProps = (state) => ({
   powerPlants: state.powerPlants,
   owner: state.owner,
   selectedPowerPlant: state.ui.selectedPowerPlant,
-  addPowerPlantModalOpened: state.ui.addPowerPlantModalOpened
+  addPowerPlantModalOpened: state.ui.addPowerPlantModalOpened,
+  totalProduced:state.ui.totalProduced
 })
 
 let actions = {
@@ -261,7 +264,8 @@ let actions = {
   selectPowerPlant,
   addToken,
   closeAddPowerPlantModal,
-  addPowerPlant
+  addPowerPlant,
+  updateTotalProduced
 }
 
 export default connect(mapStateToProps, actions)(Home);

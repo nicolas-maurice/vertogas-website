@@ -1,7 +1,7 @@
 var Web3 = require('web3');
 var VertogasJSON = require('./VertogasRegistrar.json');
 
-const parityProvider = 'http://vps412488.ovh.net:1935'
+const parityProvider = 'https://parity.vertogas.lab-apps.fr'
 const web3 = new Web3(new Web3.providers.HttpProvider(parityProvider));
 
 const contractAddress = "0xfc12342dcf4dc690e03325cc549c1272ea342092"
@@ -110,3 +110,4 @@ const vertogas = (vertogasInstance=VertogasInstance, sender=defaultSender) => {
 }
 
 module.exports = vertogas;
+

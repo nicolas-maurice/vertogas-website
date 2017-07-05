@@ -6,7 +6,6 @@ import Add from 'material-ui/svg-icons/content/add';
 
 import './AppBar.css';
 
-import Logo from '../../../../public/img/logo.png';
 const styles = {
   mediumIcon: {
     width: 48,
@@ -18,6 +17,8 @@ const styles = {
     right:30
   }
 };
+
+import Logo from '../../img/logo.png';
 
 const AppBar = (props) => {
   return (

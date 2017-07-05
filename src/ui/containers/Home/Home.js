@@ -21,6 +21,8 @@ import { getPowerPlants, selectPowerPlant, addToken, closeAddPowerPlantModal, ad
 import AddPowerPlantModal from './AddPowerPlantModal'
 import Waiting from '../Waiting/Waiting'
 
+import vertogas from '../../../web3'
+
 const producerBody = {
   float: 'left',
   width: 'calc(100% - 350px)',
@@ -37,8 +39,13 @@ export class Home extends React.Component {
       snackbarOpenMessage: ''
     }
     this.renderCertificates = this.renderCertificates.bind(this);
+
     this._addPowerPlant = this._addPowerPlant.bind(this);
     this.addNewToken = this.addNewToken.bind(this);
+
+    this.onProduce = this.onProduce.bind(this);
+    this.onProduceCb = this.onProduceCb.bind(this);
+
   }
   setProgressTimer() {
     this.progressTimer = setInterval(() => {
@@ -173,6 +180,32 @@ export class Home extends React.Component {
                   "createDate": new Date().getTime()
       })
   }
+
+  onProduceCb(powerPlant, {certifID, metaData,  owner, timestamp}) {
+    // this.setState({
+    //   progress:0,
+    //   snackbarOpen:false,
+    //   snackbarOpenMessage:''
+    // })
+    // this.setProgressTimer();
+    this.props.addToken(powerPlant, {
+        certifID, 
+        claimer: null, 
+        isClaimed: false, 
+        metaData, 
+        owner,
+        issuedDate: timestamp,
+    })
+  }
+
+  onProduce(powerPlant) {
+    vertogas().newCertificate(
+      powerPlant.metaData,
+      powerPlant.owner,
+      (token) => this.onProduceCb(powerPlant, token)
+    )
+  }
+
   render() {
     const { powerPlants, selectedPowerPlant, selectPowerPlant, addPowerPlantModalOpened,totalProduced } = this.props;
     if (!selectedPowerPlant) {

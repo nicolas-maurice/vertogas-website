@@ -4,20 +4,30 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import CircularProgress from 'material-ui/CircularProgress';
 
+import vertogas from '../../web3'
+
 class TokenStatusButton extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      claimed:props.claimed,
+      claimed: props.claimed,
       pending:false
     }
     this.claimCertificate = this.claimCertificate.bind(this);
+    this.claimCertificateCb = this.claimCertificateCb.bind(this);
   }
 
-  claimCertificate(){
+  claimCertificateCb() {
     this.setState({
       claimed: true
     })
+  }
+  
+  claimCertificate(){
+      vertogas().claim(
+        this.props.certifID,
+        this.claimCertificateCb
+    )
   }
 
   render(){

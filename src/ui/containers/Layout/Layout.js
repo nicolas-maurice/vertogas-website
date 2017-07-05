@@ -10,7 +10,7 @@ import SideBar from './SideBar';
 import defaultTheme from '../defaultTheme';
 
 import './Layout.css';
-import background from '../../../../public/img/background.png'
+import background from '../../img/background.png'
 
 const styles = {
   main: {

@@ -1,10 +1,15 @@
+import {
+  PARITY_URL,
+  CONTRACT_ADDRESS,
+} from '../common'
+
 var Web3 = require('web3');
 var VertogasJSON = require('./VertogasRegistrar.json');
 
-const parityProvider = 'https://parity.vertogas.lab-apps.fr'
+const parityProvider = PARITY_URL
 const web3 = new Web3(new Web3.providers.HttpProvider(parityProvider));
 
-const contractAddress = "0xfc12342dcf4dc690e03325cc549c1272ea342092"
+const contractAddress = CONTRACT_ADDRESS
 const VertogasContract = web3.eth.contract(VertogasJSON.abi)
 const VertogasInstance = VertogasContract.at(contractAddress)
 
